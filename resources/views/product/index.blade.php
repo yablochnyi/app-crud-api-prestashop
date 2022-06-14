@@ -1,40 +1,38 @@
-{{--<!DOCTYPE html>--}}
-{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
-{{--<head>--}}
-{{--    <meta charset="utf-8">--}}
-{{--    <meta name="viewport" content="width=device-width, initial-scale=1">--}}
-{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-
-{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
-
-{{--    <!-- Fonts -->--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">--}}
-
-{{--    <!-- Styles -->--}}
-{{--    <link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
-
-{{--    <!-- Scripts -->--}}
-{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
-{{--</head>--}}
-{{--<body class="font-sans antialiased">--}}
-{{--<div class="min-h-screen bg-gray-100">--}}
-{{--    @include('layouts.navigation')--}}
-
-{{--    @foreach($products as $product)--}}
-{{--        {{$product}}--}}
-{{--    @endforeach--}}
-
-
-{{--</div>--}}
-{{--</body>--}}
-{{--</html>--}}
-
 <x-app-layout>
-    <x-slot name="header">
-
-    </x-slot>
-
-        @foreach($products as $product)
-            {{$product}}
-        @endforeach
+    <body>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <x-slot name="header">
+                    <div class="pull-left">
+                        <h2> DataTables Products</h2>
+                    </div>
+                </x-slot>
+            </div>
+        </div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <div class="card-body">
+            <table class="table table-bordered" id="datatable-crud">
+                <thead>
+                <tr>
+                    <th>item_code</th>
+                    <th>product_number</th>
+                    <th>product_name</th>
+                    <th>unit</th>
+                    <th>quantity</th>
+                    <th>price_aed</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </table>
+            <div class="mt-6">
+                <a class="btn btn-success" href="{{ route('products.create') }}"> Create Product</a>
+            </div>
+        </div>
+    </div>
+    </body>
 </x-app-layout>

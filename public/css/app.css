@@ -187,8 +187,8 @@ select {
 
 button,
 [type='button'],
-[type='reset'],
-[type='submit'] {
+[type='reset']
+ {
   -webkit-appearance: button; /* 1 */
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
