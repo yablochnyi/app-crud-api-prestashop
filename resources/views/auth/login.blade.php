@@ -4,6 +4,22 @@
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
+
+            <div >
+                @if (Route::has('login'))
+                    <div >
+                        @auth
+                            <a href="{{ url('/products') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Products</a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </x-slot>
 
         <!-- Session Status -->
@@ -11,6 +27,7 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -40,6 +57,7 @@
                 </label>
             </div>
 
+
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
@@ -47,7 +65,7 @@
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button class="ml-3 mt-6">
                     {{ __('Log in') }}
                 </x-button>
             </div>
