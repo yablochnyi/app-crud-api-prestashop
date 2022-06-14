@@ -13,20 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
-        return redirect()->route('products.index');
+        return view('user.product.index');
     } else {
         return view('auth.login');
     }
 });
 
-
-Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::resource('products', \App\Http\Controllers\ProductController::class);
-    Route::post('/delete-product', [\App\Http\Controllers\ProductController::class,'destroy']);
+Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
+    Route::resource('admin/products', \App\Http\Controllers\AdminProductController::class);
+    Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
 });
 
+Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
 
 require __DIR__ . '/auth.php';
