@@ -19,7 +19,7 @@ class AdminMiddleware
     {
         if (auth()->user()->role !== User::ROLE_ADMIN)
         {
-            return redirect('/');
+            return redirect('/products');
         }
         return $next($request);
     }
