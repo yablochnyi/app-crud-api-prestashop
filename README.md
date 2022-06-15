@@ -11,7 +11,7 @@
 
 - Laravel 9
 - jQuery DataTables
-- w/o database
+- MySQL database
 
 ## Instalation 
 
