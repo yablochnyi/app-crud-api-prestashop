@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('item_code');
             $table->integer('product_number');
             $table->string('product_name');
-            $table->integer('unit');
+            $table->string('unit');
             $table->integer('quantity');
-            $table->decimal('price_aed');
+            $table->float('price_aed');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -41,7 +41,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>product_name:</strong>
+                    <strong>Product name:</strong>
                     <input type="text" name="product_name" class="form-control" placeholder="Product Name">
                     @error('product_name')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

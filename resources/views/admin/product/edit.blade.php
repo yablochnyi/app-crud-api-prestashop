@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>item_code:</strong>
+                    <strong>Item code:</strong>
                     <input type="number" name="item_code" value="{{ $product->item_code }}" class="form-control" placeholder="item_code">
                     @error('item_code')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>product_number:</strong>
+                    <strong>Product number:</strong>
                     <input type="number" name="product_number" class="form-control" placeholder="product_number" value="{{ $product->product_number }}">
                     @error('product_number')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -42,7 +42,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>product_name:</strong>
+                    <strong>Product name:</strong>
                     <input type="text" name="product_name" value="{{ $product->product_name }}" class="form-control" placeholder="product_name">
                     @error('product_name')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>unit:</strong>
+                    <strong>Unit:</strong>
                     <input type="number" name="unit" value="{{ $product->unit }}" class="form-control" placeholder="unit">
                     @error('unit')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>quantity:</strong>
+                    <strong>Quantity:</strong>
                     <input type="number" name="quantity" value="{{ $product->quantity }}" class="form-control" placeholder="quantity">
                     @error('quantity')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>price_aed:</strong>
+                    <strong>Price AED:</strong>
                     <input type="number" name="price_aed" value="{{ $product->price_aed }}" class="form-control" placeholder="price_aed">
                     @error('price_aed')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
