@@ -1,4 +1,3 @@
-{{--<x-app-layout>--}}
 @extends('admin.product.layouts')
 @section('admin.content')
     <body>
@@ -43,7 +42,6 @@
                     <x-dropdown-link :href="route('export')">
                         {{ __('Export') }}
                     </x-dropdown-link>
-                    </form>
                 </x-slot>
             </x-dropdown>
 
@@ -66,4 +64,4 @@
     </div>
     </body>
 @endsection
-{{--</x-app-layout>--}}
+

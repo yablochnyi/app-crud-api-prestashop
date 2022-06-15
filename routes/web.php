@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
-    Route::get('products/export/', [\App\Http\Controllers\ImportExportController::class, 'export'])->name('export');
+    Route::get('products/export/', [\App\Http\Controllers\ExportController::class, 'export'])->name('export');
 });
 
 Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
