@@ -27,7 +27,7 @@
                     <button
                         class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all">
 
-                        <div> Import/Export</div>
+                        <div> Export</div>
                         <div class="ml-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"
                                  xmlns="http://www.w3.org/2000/svg">
