@@ -21,11 +21,15 @@ Route::get('/', function () {
     }
 });
 
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
+    Route::get('products/export/', [\App\Http\Controllers\ImportExportController::class, 'export'])->name('export');
+});
+
 Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::resource('admin/products', \App\Http\Controllers\AdminProductController::class);
     Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
 });
 
-Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
 
 require __DIR__ . '/auth.php';
