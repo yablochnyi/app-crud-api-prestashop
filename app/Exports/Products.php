@@ -24,7 +24,6 @@ class Products implements FromCollection, WithHeadings, WithMapping, WithEvents,
     public function headings(): array
     {
         return [
-            'ID',
             'Item code',
             'Product number',
             'Product name',
@@ -36,7 +35,6 @@ class Products implements FromCollection, WithHeadings, WithMapping, WithEvents,
 
     public function map ($signup):array {
         return [
-            $signup->id,
             $signup->item_code,
             $signup->product_number,
             $signup->product_name,
