@@ -49,11 +49,14 @@
                 {data: 'item_code', name: 'item_code'},
                 {data: 'product_number', name: 'product_number'},
                 {data: 'product_name', name: 'product_name'},
+                {data: 'category', name: 'category'},
                 {data: 'unit', name: 'unit'},
                 {data: 'quantity', name: 'quantity'},
                 {data: 'price_aed', name: 'price_aed'},
                 {data: 'action', name: 'action', orderable: false},
             ],
+
+
             order: [[0, 'desc']]
         });
         $('body').on('click', '.delete', function () {

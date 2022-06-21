@@ -83,6 +83,7 @@
                     <th>item_code</th>
                     <th>product_number</th>
                     <th>product_name</th>
+                    <th>category</th>
                     <th>unit</th>
                     <th>quantity</th>
                     <th>price_aed</th>

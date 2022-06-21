@@ -19,6 +19,7 @@ class Products implements ToModel, WithHeadingRow
             'item_code' => $row['item_code'],
             'product_number' => $row['product_number'],
             'product_name' => $row['product_name'],
+            'category_id' => $row['category'],
             'unit' => $row['unit'],
             'quantity' => $row['quantity'],
             'price_aed' => $row['price_aed'],

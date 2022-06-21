@@ -17,12 +17,17 @@ return new class extends Migration
             $table->id();
             $table->integer('item_code');
             $table->integer('product_number');
-            $table->string('product_name');
+            $table->text('product_name');
+            $table->unsignedBigInteger('category_id');
             $table->string('unit');
             $table->integer('quantity');
             $table->float('price_aed');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index('category_id', 'product_category_idx');
+
+            $table->foreign('category_id', 'product_category_fk')->on('categories')->references('id');
         });
     }
 
