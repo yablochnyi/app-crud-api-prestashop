@@ -24,8 +24,8 @@ class Products implements ToCollection, WithHeadingRow
             '*.item_code' => 'required|integer',
             '*.product_number' => 'required|integer',
             '*.product_name' => 'required|string',
-            '*.unit' => 'required',
-            '*.quantity' => 'required',
+            '*.unit' => 'required|string',
+            '*.quantity' => 'required|integer',
             '*.price_aed' => 'required',
             '*.category' => 'required',
         ])->validate();
