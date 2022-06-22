@@ -8,6 +8,7 @@
                     <th>item_code</th>
                     <th>product_number</th>
                     <th>product_name</th>
+                    <th>category</th>
                     <th>unit</th>
                     <th>quantity</th>
                     <th>price_aed</th>
@@ -19,6 +20,7 @@
                         <td>{{$product->item_code}}</td>
                         <td>{{$product->product_number}}</td>
                         <td>{{$product->product_name}}</td>
+                        <td>{{$product->category->title}}</td>
                         <td>{{$product->unit}}</td>
                         <td>{{$product->quantity}}</td>
                         <td>{{$product->price_aed}}</td>
@@ -27,12 +29,13 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>item_code</th>
+                    <th>product_number</th>
+                    <th>product_name</th>
+                    <th>category</th>
+                    <th>unit</th>
+                    <th>quantity</th>
+                    <th>price_aed</th>
                 </tr>
                 </tfoot>
             </table>

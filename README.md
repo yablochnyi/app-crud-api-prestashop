@@ -5,12 +5,12 @@
 - Access after authorization
 - Output from the product database in the form of a table
 - CRUD for products
-- Import to Excel
+- Export/Import
 
 ## Technological stack
 
 - Laravel 9
-- jQuery DataTables
+- Yajra DataTables
 - MySQL database
 
 ## Instalation 
