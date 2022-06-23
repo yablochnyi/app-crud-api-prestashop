@@ -22,6 +22,10 @@
                 <a class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all"
                    href="{{ route('products.create') }}"> Create Product</a>
             </div>
+            <div>
+                <a class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all"
+                   href="{{ route('add.all.prestashop') }}"> Add or Update all products to ps</a>
+            </div>
 
             <div>
                 <div class="ml-1">
@@ -101,7 +105,7 @@
                     <th>unit</th>
                     <th>quantity</th>
                     <th>price_aed</th>
-                    <th>Action</th>
+                    <th width="300px">Action</th>
                 </tr>
                 </thead>
             </table>

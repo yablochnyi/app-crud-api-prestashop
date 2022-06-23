@@ -30,8 +30,11 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::resource('admin/products', \App\Http\Controllers\AdminProductController::class);
     Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
     Route::get('products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
-    Route::post('admin/products/import',[\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
+    Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
 });
 
 
 require __DIR__ . '/auth.php';
+Route::get('/test/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
+Route::get('/test/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
+Route::get('/test2', [\App\Http\Controllers\TestController::class, 'gettest'])->name('test2');
