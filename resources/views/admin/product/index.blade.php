@@ -54,7 +54,6 @@
                     </svg>
                 </div>
             </button>
-            <!-- Modal -->
 
             <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -92,10 +91,11 @@
                     </div>
                 </div>
             </form>
+            <!-- Modal -->
         </div>
 
         <div class="card-body">
-            <table class="table table-bordered" id="datatable-crud">
+            <table class="table table-bordered ml-4" id="datatable-crud" width="1500" >
                 <thead>
                 <tr>
                     <th>item_code</th>
@@ -110,6 +110,7 @@
                 </thead>
             </table>
         </div>
+
     </div>
     </body>
 @endsection
