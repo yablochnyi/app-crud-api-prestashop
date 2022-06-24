@@ -72,7 +72,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Unit:</strong>
-                        <input type="number" name="unit" value="{{ $product->unit }}" class="form-control"
+                        <input type="text" name="unit" value="{{ $product->unit }}" class="form-control"
                                placeholder="unit">
                         @error('unit')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

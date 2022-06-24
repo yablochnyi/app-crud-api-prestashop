@@ -21,6 +21,10 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/view', function () {
+    return view('test');
+});
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
 
@@ -36,5 +40,6 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
 
 require __DIR__ . '/auth.php';
 Route::get('/test/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
+Route::get('/tester', [\App\Http\Controllers\Prestashop\TestProductController::class, 'getProducts'])->name('stashop');
 Route::get('/test/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
 Route::get('/test2', [\App\Http\Controllers\TestController::class, 'gettest'])->name('test2');
