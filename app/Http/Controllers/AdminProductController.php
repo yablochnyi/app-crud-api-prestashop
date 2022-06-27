@@ -16,8 +16,9 @@ class AdminProductController extends Controller
         if (request()->ajax()) {
             $data = Product::all();
             return DataTables::of($data)
-                ->addColumn('action', 'admin.product.action')
-                ->rawColumns(['action'])
+                ->addColumn('actionRme', 'admin.product.actionRme')
+                ->addColumn('actionPresta', 'admin.product.actionPresta')
+                ->rawColumns(['actionPresta', 'actionRme'])
                 ->addIndexColumn()
                 ->addColumn('category', function (Product $product) {
                     return $product->category->title;

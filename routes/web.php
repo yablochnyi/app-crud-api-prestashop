@@ -35,11 +35,15 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
     Route::get('products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
     Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
+    Route::get('add/all/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
+    Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
+    Route::get('delete/{product}/prestashop', [\App\Http\Controllers\Prestashop\DeleteProductController::class, 'DeleteProductOnPrestaShop'])->name('delete.prestashop');
+
 });
 
 
 require __DIR__ . '/auth.php';
-Route::get('/test/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
-Route::get('/tester', [\App\Http\Controllers\Prestashop\TestProductController::class, 'getProducts'])->name('stashop');
-Route::get('/test/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
-Route::get('/test2', [\App\Http\Controllers\TestController::class, 'gettest'])->name('test2');
+
+
+//Route::get('/test/{product}/prestashop', [\App\Http\Controllers\Prestashop\TestProductController::class, 'getProducts'])->name('stashop');
+//Route::get('/test2', [\App\Http\Controllers\TestController::class, 'gettest'])->name('test2');

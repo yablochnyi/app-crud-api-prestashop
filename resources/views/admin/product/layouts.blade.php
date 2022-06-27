@@ -46,6 +46,7 @@
             serverSide: true,
             ajax: "{{ url('admin/products') }}",
             columns: [
+                {data: 'actionRme', name: 'actionRme', orderable: true},
                 {data: 'item_code', name: 'item_code'},
                 {data: 'product_number', name: 'product_number'},
                 {data: 'product_name', name: 'product_name'},
@@ -53,7 +54,7 @@
                 {data: 'unit', name: 'unit'},
                 {data: 'quantity', name: 'quantity'},
                 {data: 'price_aed', name: 'price_aed'},
-                {data: 'action', name: 'action', orderable: false},
+                {data: 'actionPresta', name: 'actionPresta', orderable: false},
             ],
 
             order: [[0, 'desc']]

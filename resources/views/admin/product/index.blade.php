@@ -98,6 +98,7 @@
             <table class="table table-bordered ml-4" id="datatable-crud" width="1500" >
                 <thead>
                 <tr>
+                    <th width="300px">actionRme</th>
                     <th>item_code</th>
                     <th>product_number</th>
                     <th>product_name</th>
@@ -105,7 +106,7 @@
                     <th>unit</th>
                     <th>quantity</th>
                     <th>price_aed</th>
-                    <th width="300px">Action</th>
+                    <th width="800px">actionPresta</th>
                 </tr>
                 </thead>
             </table>

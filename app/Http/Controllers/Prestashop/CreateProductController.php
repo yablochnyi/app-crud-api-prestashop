@@ -41,30 +41,7 @@ class CreateProductController extends Controller
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();
         }
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function getIdStockAvailableAndSet($ProductId, $product)
     {
