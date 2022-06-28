@@ -11,11 +11,10 @@ class UpdateProductController extends Controller
 {
     public function updateProductPriceOnPrestaShop(Product $product)
     {
-        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
+        $value = config('prestashop');
 
         try {
-            $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
 
             $xml = $webService->get([
                 'resource' => 'products',
@@ -53,10 +52,9 @@ class UpdateProductController extends Controller
 
     public function updateProductQuantityOnPrestaShop(Product $product)
     {
-        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
+        $value = config('prestashop');
 
-        $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
+        $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
         $opt = array('resource' => 'stock_availables');
         $opt['id'] = 236;
         $xml = $webService->get($opt);
@@ -70,8 +68,8 @@ class UpdateProductController extends Controller
 //updated quantity
 //    public function getQuantity(Product $product)
 //    {
-//        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-//        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
+//        define('PS_SHOP_PATH', '');
+//        define('PS_WS_AUTH_KEY', '');
 //
 //        $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
 //        $opt = array('resource' => 'stock_availables');
@@ -86,8 +84,8 @@ class UpdateProductController extends Controller
 
 //        require_once 'PSWebServiceLibrary.php';
 //
-//        $url = 'myurl.com';
-//        $key = 'ABCDEFGHIJKLMNOPQRSTUVXZ1234567890';
+//        $url = '';
+//        $key = '';
 //        $debug = true;
 //        $webService = new PrestaShopWebservice($url, $key, $debug);
 //

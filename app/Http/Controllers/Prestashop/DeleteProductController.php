@@ -11,11 +11,10 @@ class DeleteProductController extends Controller
 {
     public function deleteProductOnPrestaShop(Product $product)
     {
-        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
+        $value = config('prestashop');
 
         try {
-            $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
             $webService->delete([
                 'resource' => 'products',
                 'id' => $product->product_number,

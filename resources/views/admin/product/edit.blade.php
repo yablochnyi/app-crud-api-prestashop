@@ -92,7 +92,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Price AED:</strong>
-                        <input type="number" name="price_aed" value="{{ $product->price_aed }}" class="form-control"
+                        <input type="text" name="price_aed" value="{{ $product->price_aed }}" class="form-control"
                                placeholder="price_aed">
                         @error('price_aed')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

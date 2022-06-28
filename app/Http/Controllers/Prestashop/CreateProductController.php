@@ -11,13 +11,12 @@ class CreateProductController extends Controller
 {
     public function addProductOnPrestaShop(Product $product)
     {
-        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
+        $value = config('prestashop');
 
         try {
-            $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
             $products = array('resource' => 'products');
-            $xml = $webService->get(array('url' => PS_SHOP_PATH . '/api/products?schema=blank'));
+            $xml = $webService->get(array('url' => $value['path'] . '/api/products?schema=blank'));
             $resource_product = $xml->children()->children();
 
             unset($resource_product->position_in_category);
@@ -45,7 +44,8 @@ class CreateProductController extends Controller
 
     public function getIdStockAvailableAndSet($ProductId, $product)
     {
-        $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
+        $value = config('prestashop');
+        $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
 
         $opt['resource'] = 'products';
         $opt['id'] = $ProductId;
@@ -58,8 +58,9 @@ class CreateProductController extends Controller
 
     public function set_product_quantity($ProductId, $StokId, $AttributeId, $product)
     {
-        $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
-        $xml = $webService->get(array('url' => PS_SHOP_PATH . '/api/stock_availables?schema=blank'));
+        $value = config('prestashop');
+        $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+        $xml = $webService->get(array('url' => $value['path'] . '/api/stock_availables?schema=blank'));
         $resources = $xml->children()->children();
         $resources->id = $StokId;
         $resources->id_product = $ProductId;
@@ -80,15 +81,13 @@ class CreateProductController extends Controller
 
     public function addOrUpdateAllProductOnPrestaShop()
     {
-        define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
-        define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
-
+        $value = config('prestashop');
         $products = Product::all();
 
         try {
-            $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, false);
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
             $opt = array('resource' => 'products');
-            $xml = $webService->get(array('url' => PS_SHOP_PATH . '/api/products?schema=blank'));
+            $xml = $webService->get(array('url' => $value['path'] . '/api/products?schema=blank'));
             $resource_product = $xml->children()->children();
 
             unset($resource_product->position_in_category);
