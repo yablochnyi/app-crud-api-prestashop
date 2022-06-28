@@ -9,19 +9,19 @@ use PrestaShopWebserviceException;
 
 class DeleteProductController extends Controller
 {
-    public function DeleteProductOnPrestaShop(Product $product)
+    public function deleteProductOnPrestaShop(Product $product)
     {
         define('PS_SHOP_PATH', 'https://rme.rywal.dev/');
         define('PS_WS_AUTH_KEY', 'V8B6U7TS71NCU18K1WLG4F4CI6A4IMHF');
 
         try {
             $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
-//            $id = $product->product_number;
             $webService->delete([
                 'resource' => 'products',
-                'id' => $product->product_number, // Here we use hard coded value but of course you could get this ID from a request parameter or anywhere else
+                'id' => $product->product_number,
             ]);
-            echo 'Customer with ID ' . $product->product_number . ' was successfully deleted' . PHP_EOL;
+            return redirect()->route('products.index')
+                ->with('success', 'Product has been deleted successfully.');
         } catch (PrestaShopWebserviceException $e) {
             echo 'Error:' . $e->getMessage();
         }

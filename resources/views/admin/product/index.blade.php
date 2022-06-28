@@ -95,18 +95,18 @@
         </div>
 
         <div class="card-body">
-            <table class="table table-bordered ml-4" id="datatable-crud" width="1500" >
+            <table class="table table-bordered ml-4" id="datatable-crud" width="1700" >
                 <thead>
                 <tr>
-                    <th width="300px">actionRme</th>
-                    <th>item_code</th>
-                    <th>product_number</th>
-                    <th>product_name</th>
-                    <th>category</th>
-                    <th>unit</th>
-                    <th>quantity</th>
-                    <th>price_aed</th>
-                    <th width="800px">actionPresta</th>
+                    <th width="300px">Action App-CRUD-RME</th>
+                    <th width="150px">Item code</th>
+                    <th width="230">Product number</th>
+                    <th width="170px">Product name</th>
+                    <th>Category</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th width="170px">Price AED</th>
+                    <th width="1000px">Action PrestaShop</th>
                 </tr>
                 </thead>
             </table>

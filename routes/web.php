@@ -21,10 +21,6 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/view', function () {
-    return view('test');
-});
-
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
 
@@ -37,13 +33,12 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
     Route::get('add/all/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
     Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
-    Route::get('delete/{product}/prestashop', [\App\Http\Controllers\Prestashop\DeleteProductController::class, 'DeleteProductOnPrestaShop'])->name('delete.prestashop');
-
+    Route::delete('delete/{product}/prestashop', [\App\Http\Controllers\Prestashop\DeleteProductController::class, 'deleteProductOnPrestaShop'])->name('delete.prestashop');
+    Route::put('update/price/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductPriceOnPrestaShop'])->name('update.price.prestashop');
+    Route::put('update/quantity/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductQuantityOnPrestaShop'])->name('update.quantity.prestashop');
 });
-
 
 require __DIR__ . '/auth.php';
 
 
-//Route::get('/test/{product}/prestashop', [\App\Http\Controllers\Prestashop\TestProductController::class, 'getProducts'])->name('stashop');
-//Route::get('/test2', [\App\Http\Controllers\TestController::class, 'gettest'])->name('test2');
+
