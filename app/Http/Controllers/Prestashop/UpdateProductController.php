@@ -53,47 +53,30 @@ class UpdateProductController extends Controller
     public function updateProductQuantityOnPrestaShop(Product $product)
     {
         $value = config('prestashop');
-
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-        $opt = array('resource' => 'stock_availables');
-        $opt['id'] = 236;
-        $xml = $webService->get($opt);
 
+        $opt['resource'] = 'products';
+        $opt['id'] = $product->product_number;
+
+        $xml = $webService->get($opt);
+        $item = $xml->product->associations->stock_availables->stock_available;
+
+        $xml = $webService->get(array('url' => $value['path'] . '/api/stock_availables?schema=blank'));
         $resources = $xml->children()->children();
-        dd($resources);
+        $resources->id = $item->id;
+        $resources->id_product = $product->product_number;
+        $resources->quantity = $product->quantity;
+        $resources->id_shop = 1;
+        $resources->out_of_stock = 1;
+        $resources->depends_on_stock = 0;
+        $resources->id_product_attribute = $item->id_product_attribute;
+        try {
+            $opt = array('resource' => 'stock_availables');
+            $opt['putXml'] = $xml->asXML();
+            $opt['id'] = $item->id;
+            $xml = $webService->edit($opt);
+        } catch (PrestaShopWebserviceException $ex) {
+            echo 'Error: <br />' . $ex->getMessage();
+        }
     }
 }
-
-
-//updated quantity
-//    public function getQuantity(Product $product)
-//    {
-//        define('PS_SHOP_PATH', '');
-//        define('PS_WS_AUTH_KEY', '');
-//
-//        $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, true);
-//        $opt = array('resource' => 'stock_availables');
-//        $opt['id'] = 19;
-//        $xml = $webService->get($opt);
-//
-//        $resources = $xml->children()->children();
-//        dd($resources);
-
-
-// reference
-
-//        require_once 'PSWebServiceLibrary.php';
-//
-//        $url = '';
-//        $key = '';
-//        $debug = true;
-//        $webService = new PrestaShopWebservice($url, $key, $debug);
-//
-//        $searchTerm = "YOURPRODUCTREFERENCE";
-//        $xml = $webService->get([
-//            'resource' => 'products',
-//            'display' => 'full',
-//            'filter[reference]' => $searchTerm
-//        ]);
-//        $resource = $xml->products->children()->children();
-

@@ -30,7 +30,7 @@ class CreateProductController extends Controller
                 $this->addProductOnPrestaShop($product);
             } else {
                 return redirect()->route('products.index')
-                        ->with('success', 'Product already exists');
+                    ->with('success', 'Product already exists');
             }
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Other error: <br />' . $ex->getMessage();
@@ -122,6 +122,7 @@ class CreateProductController extends Controller
 
             foreach ($products as $product) {
                 $resource_product->id_category_default = $product->category_id;
+                $resource_product->reference = $product->unit;
                 $resource_product->price = $product->price_aed;
                 $resource_product->active = 1;
                 $resource_product->name->language[0] = $product->product_name;
