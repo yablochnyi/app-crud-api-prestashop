@@ -9,7 +9,35 @@ use PrestaShopWebserviceException;
 
 class CreateProductController extends Controller
 {
-    public function addProductOnPrestaShop(Product $product)
+    public function searchProduct(Product $product)
+    {
+        $value = config('prestashop');
+
+        try {
+            $value = config('prestashop');
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+            $products = array('resource' => 'products');
+            $list = $webService->get($products);
+            $newProductId = $product->product_number;
+            $flag = false;
+            foreach ($list->products->product as $value) {
+                if ($value->attributes()['id'] == $newProductId) {
+                    $flag = true;
+                    break;
+                }
+            }
+            if ($flag !== true) {
+                $this->addProductOnPrestaShop($product);
+            } else {
+                return redirect()->route('products.index')
+                        ->with('success', 'Product already exists');
+            }
+        } catch (PrestaShopWebserviceException $ex) {
+            echo 'Other error: <br />' . $ex->getMessage();
+        }
+    }
+
+    public function addProductOnPrestaShop($product)
     {
         $value = config('prestashop');
 

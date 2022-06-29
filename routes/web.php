@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::get('products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
     Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
     Route::get('add/all/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
-    Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addProductOnPrestaShop'])->name('add.prestashop');
+    Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'searchProduct'])->name('add.prestashop');
     Route::delete('delete/{product}/prestashop', [\App\Http\Controllers\Prestashop\DeleteProductController::class, 'deleteProductOnPrestaShop'])->name('delete.prestashop');
     Route::put('update/price/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductPriceOnPrestaShop'])->name('update.price.prestashop');
     Route::put('update/quantity/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductQuantityOnPrestaShop'])->name('update.quantity.prestashop');

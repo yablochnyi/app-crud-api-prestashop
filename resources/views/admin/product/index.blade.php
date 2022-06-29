@@ -106,7 +106,7 @@
                     <th>Unit</th>
                     <th>Quantity</th>
                     <th width="170px">Price AED</th>
-                    <th width="1000px">Action PrestaShop</th>
+                    <th width="700px">Action PrestaShop</th>
                 </tr>
                 </thead>
             </table>
