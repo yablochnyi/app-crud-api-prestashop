@@ -23,14 +23,16 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
-
 });
 
 Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
+    // CRUD RME
     Route::resource('admin/products', \App\Http\Controllers\AdminProductController::class);
     Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
+    // EXPORT/IMPORT
     Route::get('products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
     Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
+    // PRESTASHOP
     Route::get('add/all/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'addOrUpdateAllProductOnPrestaShop'])->name('add.all.prestashop');
     Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'searchProduct'])->name('add.prestashop');
     Route::delete('delete/{product}/prestashop', [\App\Http\Controllers\Prestashop\DeleteProductController::class, 'deleteProductOnPrestaShop'])->name('delete.prestashop');
