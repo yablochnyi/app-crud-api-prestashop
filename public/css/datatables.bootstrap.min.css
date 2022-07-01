@@ -508,8 +508,8 @@ pre code {
 
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 400px;
+    padding-right: 20px;
+    padding-left: 310px;
     margin-right: auto;
 }
 
@@ -2568,7 +2568,7 @@ textarea.form-control {
 }
 
 .btn {
-    display: inline-block;
+    display: block;
     font-weight: 400;
     color: #212529;
     text-align: center;
@@ -2579,7 +2579,7 @@ textarea.form-control {
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: .375rem .75rem;
+    padding: .175rem .25rem;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
@@ -2684,11 +2684,32 @@ a.btn.disabled, fieldset:disabled a.btn {
     box-shadow: 0 0 0 .2rem rgba(130, 138, 145, .5)
 }
 
+.btn-custom-success {
+    color: #000000;
+    background-color: transparent;
+    border-color: #000000;
+}
+
+.btn-custom-success:hover {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000
+}
+
+.btn-custom-success.focus, .btn-custom-success:focus {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+    box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5)
+}
+
 .btn-success {
     color: #fff;
     background-color: #28a745;
     border-color: #28a745
 }
+
+
 
 .btn-success:hover {
     color: #fff;
@@ -2789,10 +2810,16 @@ a.btn.disabled, fieldset:disabled a.btn {
     box-shadow: 0 0 0 .2rem rgba(222, 170, 12, .5)
 }
 
+.btn-custom-danger {
+    color: #000000;
+    background-color: transparent;
+    border-color: #000000;
+}
+
 .btn-danger {
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545
+    border-color: #000000;
 }
 
 .btn-danger:hover {
@@ -4722,7 +4749,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem
+    padding: 1.25rem;
+    width: 1400px;
 }
 
 .card-title {
