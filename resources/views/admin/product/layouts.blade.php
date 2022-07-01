@@ -8,7 +8,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap.min.css') }}">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -26,6 +26,7 @@
 <div class="min-h-screen bg-gray-100">
 @include('layouts.navigation')
 @include('admin.sidebar.prestashop_sidebar')
+@include('admin.sidebar.rme_sidebar')
 <!-- Page Heading -->
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
