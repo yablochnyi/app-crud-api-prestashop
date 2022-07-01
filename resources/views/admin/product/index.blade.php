@@ -23,11 +23,6 @@
                    href="{{ route('products.create') }}"> Create Product</a>
             </div>
             <div>
-                <a class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all"
-                   href="{{ route('add.all.prestashop') }}"> Add or Update all products to ps</a>
-            </div>
-
-            <div>
                 <div class="ml-1">
                     <a class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all"
                        href="{{ route('export') }}"> Export
@@ -95,23 +90,22 @@
         </div>
 
         <div class="card-body">
-            <table class="table table-bordered ml-4" id="datatable-crud" width="1700" >
+            <table class="table table-bordered ml-4" id="datatable-crud" width="1200" >
                 <thead>
                 <tr>
-                    <th width="300px">Action App-CRUD-RME</th>
-                    <th width="150px">Item code</th>
-                    <th width="230">Product number</th>
-                    <th width="170px">Product name</th>
+                    <th>Action App-CRUD-RME</th>
+                    <th>Item code</th>
+                    <th>Product number</th>
+                    <th>Product name</th>
                     <th>Category</th>
                     <th>Unit</th>
                     <th>Quantity</th>
-                    <th width="170px">Price AED</th>
-                    <th width="700px">Action PrestaShop</th>
+                    <th>Price AED</th>
+                    <th width="200px">Action PrestaShop</th>
                 </tr>
                 </thead>
             </table>
         </div>
-
     </div>
     </body>
 @endsection

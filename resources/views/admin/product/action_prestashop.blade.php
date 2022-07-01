@@ -6,14 +6,14 @@
     @csrf
     @method('put')
     <button type="submit" class="edit btn btn-success edit mt-1">
-            Update price to prestashop
+            Update price
     </button>
 </form>
 <form method="post" action="{{ route('update.quantity.prestashop',$id) }}">
     @csrf
     @method('put')
     <button type="submit" class="edit btn btn-success edit mt-1">
-            Update quantity to prestashop
+            Update quantity
     </button>
 </form>
 <form method="post" action="{{ route('delete.prestashop',$id) }}">
