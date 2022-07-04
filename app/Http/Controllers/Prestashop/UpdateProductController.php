@@ -18,19 +18,36 @@ class UpdateProductController extends Controller
 
             $xml = $webService->get([
                 'resource' => 'products',
-                'id' => $product->product_number,
+                'display' => 'full',
+                'filter[reference]' => $product->product_number
+            ]);
+
+            $resource = $xml->products->children()->children();
+
+            $xml = $webService->get([
+                'resource' => 'products',
+                'id' => $resource->id,
             ]);
 
             $productFields = $xml->children()->children();
 
             unset($productFields->manufacturer_name);
             unset($productFields->quantity);
+            unset($productFields->id_shop_default);
+            unset($productFields->id_default_image);
+            unset($productFields->associations);
+            unset($productFields->id_default_combination);
+            unset($productFields->position_in_category);
+            unset($productFields->type);
+            unset($productFields->pack_stock_type);
+            unset($productFields->date_add);
+            unset($productFields->date_upd);
 
             $productFields->price = $product->price_aed;
 
             $webService->edit([
                 'resource' => 'products',
-                'id' => $product->product_number,
+                'id' => (int)$productFields->id,
                 'putXml' => $xml->asXML(),
             ]);
             return redirect()->route('products.index')
@@ -51,16 +68,25 @@ class UpdateProductController extends Controller
             foreach ($products as $product) {
                 $xml = $webService->get([
                     'resource' => 'products',
-                    'id' => $product->product_number,
+                    'display' => 'full',
+                    'filter[reference]' => $product->product_number
+                ]);
+
+                $resource = $xml->products->children()->children();
+
+                $xml = $webService->get([
+                    'resource' => 'products',
+                    'id' => $resource->id,
                 ]);
 
                 $productFields = $xml->children()->children();
 
+
                 unset($productFields->manufacturer_name);
                 unset($productFields->quantity);
-                unset($productFields->associations);
                 unset($productFields->id_shop_default);
                 unset($productFields->id_default_image);
+                unset($productFields->associations);
                 unset($productFields->id_default_combination);
                 unset($productFields->position_in_category);
                 unset($productFields->type);
@@ -72,10 +98,11 @@ class UpdateProductController extends Controller
 
                 $webService->edit([
                     'resource' => 'products',
-                    'id' => $product->product_number,
+                    'id' => (int)$productFields->id,
                     'putXml' => $xml->asXML(),
                 ]);
             }
+            return redirect()->route('products.index');
         } catch (PrestaShopWebserviceException $ex) {
 
             echo 'Other error: <br />' . $ex->getMessage();
@@ -88,16 +115,25 @@ class UpdateProductController extends Controller
         try {
             $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
 
-            $opt['resource'] = 'products';
-            $opt['id'] = $product->product_number;
+            $xml = $webService->get([
+                'resource' => 'products',
+                'display' => 'full',
+                'filter[reference]' => $product->product_number
+            ]);
 
-            $xml = $webService->get($opt);
+            $resource = $xml->products->children()->children();
+
+            $xml = $webService->get([
+                'resource' => 'products',
+                'id' => $resource->id,
+            ]);
+
             $item = $xml->product->associations->stock_availables->stock_available;
 
             $xml = $webService->get(array('url' => $value['path'] . '/api/stock_availables?schema=blank'));
             $resources = $xml->children()->children();
             $resources->id = $item->id;
-            $resources->id_product = $product->product_number;
+            $resources->id_product = $resource->id;
             $resources->quantity = $product->quantity;
             $resources->id_shop = 1;
             $resources->out_of_stock = 1;
@@ -123,16 +159,24 @@ class UpdateProductController extends Controller
             $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
 
             foreach ($products as $product) {
-                $opt['resource'] = 'products';
-                $opt['id'] = $product->product_number;
+                $xml = $webService->get([
+                    'resource' => 'products',
+                    'display' => 'full',
+                    'filter[reference]' => $product->product_number
+                ]);
 
-                $xml = $webService->get($opt);
+                $resource = $xml->products->children()->children();
+
+                $xml = $webService->get([
+                    'resource' => 'products',
+                    'id' => $resource->id,
+                ]);
                 $item = $xml->product->associations->stock_availables->stock_available;
 
                 $xml = $webService->get(array('url' => $value['path'] . '/api/stock_availables?schema=blank'));
                 $resources = $xml->children()->children();
                 $resources->id = $item->id;
-                $resources->id_product = $product->product_number;
+                $resources->id_product = $resource->id;
                 $resources->quantity = $product->quantity;
                 $resources->id_shop = 1;
                 $resources->out_of_stock = 1;
@@ -144,6 +188,7 @@ class UpdateProductController extends Controller
                 $opt['id'] = $item->id;
                 $webService->edit($opt);
             }
+            return redirect()->route('products.index');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();
         }

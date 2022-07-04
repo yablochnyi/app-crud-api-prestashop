@@ -14,7 +14,6 @@ class CreateAllProductController extends Controller
         $value = config('prestashop');
         $lists = Product::all();
         try {
-            $value = config('prestashop');
             $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
             foreach ($lists as $product) {
                 $xml = $webService->get([
@@ -34,9 +33,9 @@ class CreateAllProductController extends Controller
                     return redirect()->route('products.index')
                         ->with('success', 'Products already exists');
                 }
-                return redirect()->route('products.index')
-                    ->with('success', 'Product Has Been created successfully');
             }
+            return redirect()->route('products.index')
+                ->with('success', 'Products Has Been created successfully');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Other error: <br />' . $ex->getMessage();
         }
