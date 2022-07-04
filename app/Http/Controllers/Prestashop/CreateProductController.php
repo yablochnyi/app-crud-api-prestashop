@@ -13,35 +13,49 @@ class CreateProductController extends Controller
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+        $newProductId = $product->product_number;
+
         $xml = $webService->get([
-            'resource' => 'customers',
-            'filter[reference]'  => '[21]', // Here we use hard coded value but of course you could get this ID from a request parameter or anywhere else
+            'resource' => 'products',
+            'display' => 'full',
+            'filter[reference]' => $newProductId
         ]);
-        dd($xml);
-
-
-        try {
-            $value = config('prestashop');
-            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-            $products = array('resource' => 'products');
-            $list = $webService->get($products);
-            $newProductId = $product->product_number;
-            $flag = false;
-            foreach ($list->products->product as $value) {
-                if ($value->attributes()['id'] == $newProductId) {
-                    $flag = true;
-                    break;
-                }
-            }
-            if ($flag !== true) {
-                $this->addProductOnPrestaShop($product);
-            } else {
-                return redirect()->route('products.index')
-                    ->with('success', 'Product already exists');
-            }
-        } catch (PrestaShopWebserviceException $ex) {
-            echo 'Other error: <br />' . $ex->getMessage();
+        $resource = $xml->children()->children();
+        $flag = false;
+        if ($resource->product->reference == $newProductId) {
+            $flag = true;
         }
+        if ($flag !== true) {
+            $this->addProductOnPrestaShop($product);
+        } else {
+            return redirect()->route('products.index')
+                ->with('success', 'Product already exists');
+        }
+        return redirect()->route('products.index')
+            ->with('success', 'Product Has Been created successfully');
+
+//        try {
+//            $value = config('prestashop');
+//            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+//            $products = array('resource' => 'products');
+//            $list = $webService->get($products);
+//            $newProductId = $product->product_number;
+//            $flag = false;
+//            foreach ($list->products->product as $value) {
+//                if ($value->attributes()['id'] == $newProductId) {
+//                    $flag = true;
+//                    break;
+//                }
+//            }
+//            if ($flag !== true) {
+//                $this->addProductOnPrestaShop($product);
+//            } else {
+//                return redirect()->route('products.index')
+//                    ->with('success', 'Product already exists');
+//            }
+//        } catch (PrestaShopWebserviceException $ex) {
+//            echo 'Other error: <br />' . $ex->getMessage();
+//        }
     }
 
     public function addProductOnPrestaShop($product)
@@ -58,7 +72,7 @@ class CreateProductController extends Controller
 
             $resource_product->id_category_default = $product->category_id;
             $resource_product->price = $product->price_aed;
-            $resource_product->reference = $product->unit;
+            $resource_product->reference = $product->product_number;
             $resource_product->active = 1;
             $resource_product->name->language[0] = $product->product_name;
             $resource_product->state = 1;
