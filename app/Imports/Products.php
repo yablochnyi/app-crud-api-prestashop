@@ -22,9 +22,9 @@ class Products implements ToCollection, WithHeadingRow
     {
         Validator::make($rows->toArray(), [
             '*.item_code' => 'required|integer',
-            '*.product_number' => 'required|integer',
+            '*.product_number' => 'required',
             '*.product_name' => 'required|string',
-            '*.unit' => 'required|string',
+            '*.unit' => 'required',
             '*.quantity' => 'required|integer',
             '*.price_aed' => 'required',
             '*.category' => 'required',

@@ -17,6 +17,7 @@
             </div>
         @endif
 
+<<<<<<< HEAD
         <div class="hidden sm:flex sm:items-center sm:ml-6">
 
 
@@ -75,6 +76,10 @@
 
         <div class="card-body">
             <table class="table table-bordered ml-4" id="datatable-crud"  >
+=======
+        <div class="card-body">
+            <table class="dataTable table-bordered ml-4" id="datatable-crud" width="1200" >
+>>>>>>> dev
                 <thead>
                 <tr>
                     <th>Action App-CRUD-RME</th>

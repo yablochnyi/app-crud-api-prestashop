@@ -16,23 +16,26 @@ class CreateAllProductController extends Controller
         try {
             $value = config('prestashop');
             $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-            $products = array('resource' => 'products');
             foreach ($lists as $product) {
-                $xml = $webService->get($products);
-                $productId = $product->product_number;
+                $xml = $webService->get([
+                    'resource' => 'products',
+                    'display' => 'full',
+                    'filter[reference]' => $product->product_number
+                ]);
+                $resource = $xml->children()->children();
                 $flag = false;
-                foreach ($xml->products->product as $value) {
-                    if ($value->attributes()['id'] == $productId) {
-                        $flag = true;
-                        break;
-                    }
+
+                if ($resource->product->reference == $product->product_number) {
+                    $flag = true;
                 }
-            }
-            if ($flag !== true) {
-                $this->addProductOnPrestaShop($product);
-            } else {
+                if ($flag !== true) {
+                    $this->addProductOnPrestaShop($product);
+                } else {
+                    return redirect()->route('products.index')
+                        ->with('success', 'Products already exists');
+                }
                 return redirect()->route('products.index')
-                    ->with('success', 'Product already exists');
+                    ->with('success', 'Product Has Been created successfully');
             }
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Other error: <br />' . $ex->getMessage();
@@ -53,7 +56,7 @@ class CreateAllProductController extends Controller
 
             $resource_product->id_category_default = $product->category_id;
             $resource_product->price = $product->price_aed;
-            $resource_product->reference = $product->unit;
+            $resource_product->reference = $product->product_number;
             $resource_product->active = 1;
             $resource_product->name->language[0] = $product->product_name;
             $resource_product->state = 1;
