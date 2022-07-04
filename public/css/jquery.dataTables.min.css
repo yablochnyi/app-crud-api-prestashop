@@ -3,7 +3,8 @@ table.dataTable {
     margin: 0 auto;
     clear: both;
     border-collapse: separate;
-    border-spacing: 0
+    border-spacing: 0;
+
 }
 
 table.dataTable thead th, table.dataTable tfoot th {
@@ -272,7 +273,7 @@ table.dataTable, table.dataTable th, table.dataTable td {
 }
 
 .dataTables_wrapper .dataTables_length {
-    float: left
+    float: left;
 }
 
 .dataTables_wrapper .dataTables_filter {

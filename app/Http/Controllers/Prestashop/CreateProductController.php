@@ -12,6 +12,13 @@ class CreateProductController extends Controller
     public function searchProduct(Product $product)
     {
         $value = config('prestashop');
+        $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+        $xml = $webService->get([
+            'resource' => 'customers',
+            'filter[reference]'  => '[21]', // Here we use hard coded value but of course you could get this ID from a request parameter or anywhere else
+        ]);
+        dd($xml);
+
 
         try {
             $value = config('prestashop');
