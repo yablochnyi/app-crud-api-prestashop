@@ -5,20 +5,22 @@
     </div>
     <div class="hr-shadow">
         <ul>
-{{--            <form method="post" action="{{ route('add.all.prestashop') }}">--}}
+            <form method="post" action="{{ route('add.all.prestashop') }}">
+                @csrf
+                <button type="submit" class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-6">
+                    Add all products
+                </button>
+            </form>
+{{--            <form method="post" action="{{ route('update.price.all.prestashop') }}">--}}
 {{--                @csrf--}}
-{{--                <button type="submit" class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-6">--}}
-{{--                    Add all products--}}
+{{--                @method('put')--}}
+{{--                <button type="submit" class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-2">--}}
+{{--                    Update all prices--}}
 {{--                </button>--}}
 {{--            </form>--}}
             <li>
-                <a class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-6"
-                   href="{{ route('add.all.prestashop') }}"> Add all products</a>
-            </li>
-
-            <li>
                 <a class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-2"
-                   href="{{ route('update.all.price.prestashop') }}"> Update all prices</a>
+                   href="{{ route('update.price.all.prestashop') }}"> Update all prices</a>
             </li>
             <li>
                 <a class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-2"
