@@ -33,29 +33,6 @@ class CreateProductController extends Controller
         }
         return redirect()->route('products.index')
             ->with('success', 'Product Has Been created successfully');
-
-//        try {
-//            $value = config('prestashop');
-//            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-//            $products = array('resource' => 'products');
-//            $list = $webService->get($products);
-//            $newProductId = $product->product_number;
-//            $flag = false;
-//            foreach ($list->products->product as $value) {
-//                if ($value->attributes()['id'] == $newProductId) {
-//                    $flag = true;
-//                    break;
-//                }
-//            }
-//            if ($flag !== true) {
-//                $this->addProductOnPrestaShop($product);
-//            } else {
-//                return redirect()->route('products.index')
-//                    ->with('success', 'Product already exists');
-//            }
-//        } catch (PrestaShopWebserviceException $ex) {
-//            echo 'Other error: <br />' . $ex->getMessage();
-//        }
     }
 
     public function addProductOnPrestaShop($product)
@@ -127,41 +104,4 @@ class CreateProductController extends Controller
             echo 'Error: <br />' . $ex->getMessage();
         }
     }
-
-//    public function addOrUpdateAllProductOnPrestaShop()
-//    {
-//        $value = config('prestashop');
-//        $lists = Product::all();
-//
-//        try {
-//            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-//            $products = array('resource' => 'products');
-//            foreach ($lists as $product) {
-//                $xml = $webService->get(array('url' => $value['path'] . '/api/products?schema=blank'));
-//
-//                $resource_product = $xml->children()->children();
-//
-//                unset($resource_product->position_in_category);
-//
-//                $resource_product->id_category_default = $product->category_id;
-//                $resource_product->price = $product->price_aed;
-//                $resource_product->reference = $product->unit;
-//                $resource_product->active = 1;
-//                $resource_product->name->language[0] = $product->product_name;
-//                $resource_product->state = 1;
-//
-//                $products['postXml'] = $xml->asXML();
-//
-//                $xml = $webService->add($products);
-//                $ProductId = $xml->product->id;
-//
-//                $this->getIdStockAvailableAndSet($ProductId, $product);
-//            }
-//            return redirect()->route('products.index')
-//                ->with('success', 'Products Has Been created successfully');
-//
-//        } catch (PrestaShopWebserviceException $ex) {
-//            echo 'Error: <br />' . $ex->getMessage();
-//        }
-//    }
 }

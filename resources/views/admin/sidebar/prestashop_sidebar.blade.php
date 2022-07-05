@@ -11,13 +11,6 @@
                     Add all products
                 </button>
             </form>
-{{--            <form method="post" action="{{ route('update.price.all.prestashop') }}">--}}
-{{--                @csrf--}}
-{{--                @method('put')--}}
-{{--                <button type="submit" class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-2">--}}
-{{--                    Update all prices--}}
-{{--                </button>--}}
-{{--            </form>--}}
             <li>
                 <a class="btn btn-custom-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all mt-2"
                    href="{{ route('update.price.all.prestashop') }}"> Update all prices</a>

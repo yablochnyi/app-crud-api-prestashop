@@ -1,101 +1,160 @@
 @extends('admin.product.layouts')
 @section('admin.content')
-    <body>
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <x-slot name="header">
-                    <div class="pull-left">
-                        <h2> DataTables Products</h2>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+            {{--                <div class="row">--}}
+            {{--                    <div class="col-lg-3 col-6">--}}
+            {{--                        <!-- small box -->--}}
+            {{--                        <div class="small-box bg-info">--}}
+            {{--                            <div class="inner">--}}
+            {{--                                <h3>150</h3>--}}
+
+            {{--                                <p>New Orders</p>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="icon">--}}
+            {{--                                <i class="ion ion-bag"></i>--}}
+            {{--                            </div>--}}
+            {{--                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                    <!-- ./col -->--}}
+            {{--                    <div class="col-lg-3 col-6">--}}
+            {{--                        <!-- small box -->--}}
+            {{--                        <div class="small-box bg-success">--}}
+            {{--                            <div class="inner">--}}
+            {{--                                <h3>53<sup style="font-size: 20px">%</sup></h3>--}}
+
+            {{--                                <p>Bounce Rate</p>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="icon">--}}
+            {{--                                <i class="ion ion-stats-bars"></i>--}}
+            {{--                            </div>--}}
+            {{--                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                    <!-- ./col -->--}}
+            {{--                    <div class="col-lg-3 col-6">--}}
+            {{--                        <!-- small box -->--}}
+            {{--                        <div class="small-box bg-warning">--}}
+            {{--                            <div class="inner">--}}
+            {{--                                <h3>44</h3>--}}
+
+            {{--                                <p>User Registrations</p>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="icon">--}}
+            {{--                                <i class="ion ion-person-add"></i>--}}
+            {{--                            </div>--}}
+            {{--                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                    <!-- ./col -->--}}
+            {{--                    <div class="col-lg-3 col-6">--}}
+            {{--                        <!-- small box -->--}}
+            {{--                        <div class="small-box bg-danger">--}}
+            {{--                            <div class="inner">--}}
+            {{--                                <h3>65</h3>--}}
+
+            {{--                                <p>Unique Visitors</p>--}}
+            {{--                            </div>--}}
+            {{--                            <div class="icon">--}}
+            {{--                                <i class="ion ion-pie-graph"></i>--}}
+            {{--                            </div>--}}
+            {{--                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                    <!-- ./col -->--}}
+            {{--                </div>--}}
+            <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">PrestaShop</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-lg-7">
+                                    <div class="btn-group w-10 float-right">
+                                        <form method="post" action="{{ route('add.all.prestashop') }}">
+                                            @csrf
+                                            <button type="submit" class="btn btn-app bg-success">
+                                                <i class="fas fa-plus-circle"></i> Add all products
+                                            </button>
+                                        </form>
+                                        <a class="btn btn-app bg-danger"
+                                           href="{{ route('update.price.all.prestashop') }}">
+                                            <i class="fas fa-dollar-sign"></i> Update all prices
+                                        </a>
+                                        <a class="btn btn-app bg-warning"
+                                           href="{{ route('update.all.quantity.prestashop') }}">
+                                            <i class="fas fa-layer-group"></i> Update all quantity
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
                     </div>
-                </x-slot>
+                </div>
+
+                <!-- Main row -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">List products RME</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6"></div>
+                            <div class="col-sm-12 col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="datatable-crud"
+                                       class="table table-bordered table-hover dataTable dtr-inline">
+                                    <thead>
+                                    <tr>
+                                        <th>Action App-CRUD-RME</th>
+                                        <th>Item code</th>
+                                        <th>Product number</th>
+                                        <th>Product name</th>
+                                        <th>Category</th>
+                                        <th>Unit</th>
+                                        <th>Quantity</th>
+                                        <th>Price AED</th>
+                                        <th width="200px">Action PrestaShop</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
             </div>
-        </div>
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-        @endif
-
-<<<<<<< HEAD
-        <div class="hidden sm:flex sm:items-center sm:ml-6">
-
-
-            <!-- Button trigger modal -->
-{{--            <button--}}
-{{--                class="btn btn-success flex border-none items-center gap-1 border px-2 py-1 rounded-lg text-white font-bold bg-emerald-600 hover:bg-emerald-500 transition-all"--}}
-{{--                data-toggle="modal" data-target="#exampleModal">--}}
-{{--                <div> Import</div>--}}
-{{--                <div class="ml-1">--}}
-{{--                    <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"--}}
-{{--                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                        <path--}}
-{{--                            d="M14.17 5L19 9.83V19H5V5H14.17ZM14.17 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9.83C21 9.3 20.79 8.79 20.41 8.42L15.58 3.59C15.21 3.21 14.7 3 14.17 3ZM7 15H17V17H7V15ZM7 11H17V13H7V11ZM7 7H14V9H7V7Z"/>--}}
-{{--                    </svg>--}}
-{{--                </div>--}}
-{{--            </button>--}}
-
-{{--            <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">--}}
-{{--                @csrf--}}
-{{--                @if (count($errors) > 0)--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-md-offset-1">--}}
-{{--                            <div class="alert alert-danger alert-dismissible">--}}
-{{--                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>--}}
-{{--                                <h4><i class="icon fa fa-ban"></i> Error!</h4>--}}
-{{--                                @foreach($errors->all() as $error)--}}
-{{--                                    {{ $error }} <br>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
-{{--                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-{{--                     aria-hidden="true">--}}
-{{--                    <div class="modal-dialog">--}}
-{{--                        <div class="modal-content">--}}
-{{--                            <div class="modal-header">--}}
-{{--                                <h5 class="modal-title" id="exampleModalLabel">Add file</h5>--}}
-{{--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                                    <span aria-hidden="true">&times;</span>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                            <div class="modal-body">--}}
-{{--                                <input type="file" name="import"/>--}}
-{{--                            </div>--}}
-{{--                            <div class="modal-footer">--}}
-{{--                                <a type="submit" class="btn btn-danger" data-dismiss="modal">Close</a>--}}
-{{--                                <input type="submit" class="btn btn-success" value="Add"/>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </form>--}}
-{{--            <!-- Modal -->--}}
-        </div>
-
-        <div class="card-body">
-            <table class="table table-bordered ml-4" id="datatable-crud"  >
-=======
-        <div class="card-body">
-            <table class="dataTable table-bordered ml-4" id="datatable-crud" width="1200" >
->>>>>>> dev
-                <thead>
-                <tr>
-                    <th>Action App-CRUD-RME</th>
-                    <th>Item code</th>
-                    <th>Product number</th>
-                    <th>Product name</th>
-                    <th>Category</th>
-                    <th>Unit</th>
-                    <th>Quantity</th>
-                    <th>Price AED</th>
-                    <th width="200px">Action PrestaShop</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
+            <!-- /.card -->
+        </section>
+        <!-- right col -->
     </div>
-    </body>
 @endsection
 

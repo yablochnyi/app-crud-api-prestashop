@@ -81,7 +81,6 @@ class UpdateProductController extends Controller
 
                 $productFields = $xml->children()->children();
 
-
                 unset($productFields->manufacturer_name);
                 unset($productFields->quantity);
                 unset($productFields->id_shop_default);

@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
-        return view('user.product.index');
+        return view('admin.product.index');
     } else {
         return view('auth.login');
     }
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return view('admin.product.testindex');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
