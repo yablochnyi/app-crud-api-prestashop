@@ -103,7 +103,7 @@
                                             </button>
                                         </form>
                                         <a class="btn btn-app bg-danger"
-                                           href="{{ route('update.price.all.prestashop') }}">
+                                           href="{{ route('update.all.price.prestashop') }}">
                                             <i class="fas fa-dollar-sign"></i> Update all prices
                                         </a>
                                         <a class="btn btn-app bg-warning"
