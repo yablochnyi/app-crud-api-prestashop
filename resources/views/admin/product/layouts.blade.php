@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/css/adminlte.min.css')}}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
 </body>
 </head>
@@ -182,9 +180,6 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- ChartJS -->
-    <!-- overlayScrollbars -->
-    <script src="{{asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
     <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
     <!-- AdminLTE App -->
