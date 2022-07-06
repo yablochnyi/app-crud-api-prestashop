@@ -31138,11 +31138,11 @@ html.maximized-card {
     color: #202326
 }
 
-.alert-success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #23923d
-}
+/*.alert-success {*/
+/*    color: #fff;*/
+/*    background-color: #28a745;*/
+/*    border-color: #23923d*/
+/*}*/
 
 .alert-default-success {
     color: #155724;

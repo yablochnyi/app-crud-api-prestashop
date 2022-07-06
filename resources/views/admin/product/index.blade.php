@@ -14,11 +14,17 @@
                             <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
+                    <div class="float-left">
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -117,7 +123,6 @@
                         <!-- /.card -->
                     </div>
                 </div>
-
                 <!-- Main row -->
                 <div class="card">
                     <div class="card-header">
