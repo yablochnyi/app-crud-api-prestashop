@@ -94,8 +94,8 @@
                                 <h3 class="card-title">PrestaShop</h3>
                             </div>
                             <div class="card-body">
-                                <div class="col-lg-7">
-                                    <div class="btn-group w-10 float-right">
+                                <div class="col-lg-10">
+                                    <div class="btn-group w-10">
                                         <form method="post" action="{{ route('add.all.prestashop') }}">
                                             @csrf
                                             <button type="submit" class="btn btn-app bg-success">
