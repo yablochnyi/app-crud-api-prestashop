@@ -81,7 +81,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Unit:</strong>
-                            <input type="number" name="unit" class="form-control" placeholder="Unit">
+                            <input type="text" name="unit" class="form-control" placeholder="Unit">
                             @error('unit')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
@@ -99,7 +99,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Price AED:</strong>
-                            <input type="number" name="price_aed" class="form-control" placeholder="Price AED">
+                            <input type="number" step="0.001" name="price_aed" class="form-control" placeholder="Price AED">
                             @error('price_aed')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror

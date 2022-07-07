@@ -22,7 +22,7 @@ class Products implements ToCollection, WithHeadingRow
     {
         Validator::make($rows->toArray(), [
             '*.item_code' => 'required|integer',
-            '*.product_number' => 'required',
+//            '*.product_number' => 'required|nullable',
             '*.product_name' => 'required|string',
             '*.unit' => 'required',
             '*.quantity' => 'required|integer',
