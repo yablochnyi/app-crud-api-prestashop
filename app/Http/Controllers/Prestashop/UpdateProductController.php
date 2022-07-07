@@ -101,7 +101,8 @@ class UpdateProductController extends Controller
                     'putXml' => $xml->asXML(),
                 ]);
             }
-            return redirect()->route('products.index');
+            return redirect()->route('products.index')
+                ->with('success', 'Prices Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
 
             echo 'Other error: <br />' . $ex->getMessage();
@@ -187,7 +188,8 @@ class UpdateProductController extends Controller
                 $opt['id'] = $item->id;
                 $webService->edit($opt);
             }
-            return redirect()->route('products.index');
+            return redirect()->route('products.index')
+                ->with('success', 'Quantity Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();
         }
