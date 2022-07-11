@@ -21,10 +21,6 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/test', function () {
-    return view('admin.product.testindex');
-});
-
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
 });
@@ -44,8 +40,6 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::put('update/quantity/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductQuantityOnPrestaShop'])->name('update.quantity.prestashop');
     Route::get('update/quantity/all/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateAllProductQuantityOnPrestaShop'])->name('update.all.quantity.prestashop');
 });
-
-Route::get('category', [\App\Http\Controllers\Prestashop\GetCategoryController::class, 'getCategory']);
 
 require __DIR__ . '/auth.php';
 
