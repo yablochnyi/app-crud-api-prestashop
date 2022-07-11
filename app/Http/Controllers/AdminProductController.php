@@ -7,6 +7,8 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use PrestaShopWebservice;
+use PrestaShopWebserviceException;
 use Yajra\DataTables\DataTables;
 
 class AdminProductController extends Controller
@@ -30,16 +32,50 @@ class AdminProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.product.create', compact('categories'));
+        try {
+            $value = config('prestashop');
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+            $xml = $webService->get(['resource' => 'categories']);
+            $resources = $xml->categories->category;
+            $opts = [];
+            foreach ($resources as $resource) {
+                $attributes = $resource->attributes();
+
+                $opts[] = $webService->get(['resource' => 'categories', 'id' => $attributes]);
+            }
+            return view('admin.product.create', compact('opts'));
+        } catch (PrestaShopWebserviceException $ex) {
+            echo 'Error: <br />' . $ex->getMessage();
+        }
     }
 
     public function store(StoreRequest $request)
     {
-        $data = $request->validated();
-        Product::firstOrCreate($data);
-        return redirect()->route('products.index')
-            ->with('success', 'Product has been created successfully.');
+        try {
+            $value = config('prestashop');
+            $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
+
+            $data = $request->validated();
+            // get categories
+            $catName = $data['category_id'];
+            $xml = $webService->get(['resource' => 'categories', 'id' => $catName]);
+            // create category
+            Category::firstOrCreate([
+                'title' => $xml->category->name->language[0],
+                'prestashop_id' => $xml->category->id
+            ]);
+            // get id category in db
+            $catId = Category::where('prestashop_id', $data['category_id'])->get('id');
+            $catId = json_decode($catId, true);
+            // create product
+            $data['category_id'] = $catId[0]['id'];
+            Product::firstOrCreate($data);
+
+            return redirect()->route('products.index')
+                ->with('success', 'Product has been created successfully.');
+        } catch (PrestaShopWebserviceException $ex) {
+            echo 'Error: <br />' . $ex->getMessage();
+        }
     }
 
     public function show(Product $product)

@@ -25,12 +25,12 @@ class StoreRequest extends FormRequest
     {
         return [
             'item_code' => 'required|integer',
-//            'product_number' => 'required|integer',
+            'product_number' => 'nullable|string',
             'product_name' => 'required|string',
             'unit' => 'required',
             'quantity' => 'required',
             'price_aed' => 'required',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required',
         ];
     }
 }

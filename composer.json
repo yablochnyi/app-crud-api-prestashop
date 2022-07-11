@@ -14,7 +14,8 @@
         "prestashop/prestashop-webservice-lib": "dev-master",
         "psr/simple-cache": "1.0",
         "yajra/laravel-datatables-oracle": "^10.0",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+      "ext-json": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

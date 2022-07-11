@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->integer('prestashop_id');
             $table->string('title');
             $table->timestamps();
+
         });
     }
 

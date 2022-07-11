@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     Route::get('update/quantity/all/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateAllProductQuantityOnPrestaShop'])->name('update.all.quantity.prestashop');
 });
 
+Route::get('category', [\App\Http\Controllers\Prestashop\GetCategoryController::class, 'getCategory']);
+
 require __DIR__ . '/auth.php';
 
 
