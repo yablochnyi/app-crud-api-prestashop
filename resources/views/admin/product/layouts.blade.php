@@ -166,6 +166,8 @@
                     {data: 'product_number', name: 'product_number'},
                     {data: 'product_name', name: 'product_name'},
                     {data: 'category', name: 'category'},
+                    {data: 'description', name: 'description'},
+                    {data: 'short_description', name: 'short_category'},
                     {data: 'unit', name: 'unit'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'price_aed', name: 'price_aed'},

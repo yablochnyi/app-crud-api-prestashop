@@ -182,6 +182,8 @@
                                         <th>Product number</th>
                                         <th>Product name</th>
                                         <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Short description</th>
                                         <th>Unit</th>
                                         <th>Quantity</th>
                                         <th>Price AED</th>
