@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
@@ -27,7 +28,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     // CRUD RME
-    Route::resource('admin/products', \App\Http\Controllers\AdminProductController::class);
+    Route::get('admin/products', [\App\Http\Controllers\AdminProductController::class, 'index'])->name('admin.product.index');
+    Route::get('admin/products/create', [\App\Http\Controllers\AdminProductController::class, 'create'])->name('admin.product.create');
+    Route::post('admin/products', [\App\Http\Controllers\AdminProductController::class, 'store'])->name('admin.product.store');
+    Route::get('admin/products/{product}', [\App\Http\Controllers\AdminProductController::class, 'show'])->name('admin.product.show');
+    Route::get('admin/products/{product}/edit', [\App\Http\Controllers\AdminProductController::class, 'edit'])->name('admin.product.edit');
+    Route::patch('admin/products/{product}', [\App\Http\Controllers\AdminProductController::class, 'update'])->name('admin.product.update');
     Route::post('admin/delete-product', [\App\Http\Controllers\AdminProductController::class, 'destroy']);
     // EXPORT/IMPORT
     Route::get('products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
@@ -44,7 +50,9 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
 //    Route::get('update/description', [\App\Http\Controllers\Prestashop\UpdateDescriptionController::class, 'updateDescriptionOnPrestaShop'])->name('update.description');
 });
 
-require __DIR__ . '/auth.php';
+
+
+
 
 
 

@@ -71,7 +71,7 @@ class AdminProductController extends Controller
             $data['category_id'] = $catId[0]['id'];
             Product::firstOrCreate($data);
 
-            return redirect()->route('products.index')
+            return redirect()->route('admin.product.index')
                 ->with('success', 'Product has been created successfully.');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();
@@ -93,7 +93,7 @@ class AdminProductController extends Controller
     {
         $data = $request->validated();
         $product->update($data);
-        return redirect()->route('products.index')
+        return redirect()->route('admin.product.index')
             ->with('success', 'Product Has Been updated successfully');
     }
 

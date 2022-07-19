@@ -10,7 +10,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('products.index')}}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Home</a></li>
                             <li class="breadcrumb-item active">create</li>
                         </ol>
                     </div><!-- /.col -->
@@ -26,7 +26,7 @@
                         </div>
                     </x-slot>
                     <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ route('admin.product.index') }}"> Back</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">

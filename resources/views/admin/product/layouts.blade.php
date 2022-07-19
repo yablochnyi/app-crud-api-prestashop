@@ -76,7 +76,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
 
-            <a href="{{route('products.index')}}" class="brand-link">
+            <a href="{{route('admin.product.index')}}" class="brand-link">
                 <x-application-logo class="brand-image img-circle elevation-3" style="opacity: .8"/>
             </a>
             <!-- Sidebar -->
@@ -88,7 +88,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('products.create') }}" class="nav-link">
+                            <a href="{{ route('admin.product.create') }}" class="nav-link">
 
                                 Create Product</a>
                         </li>
