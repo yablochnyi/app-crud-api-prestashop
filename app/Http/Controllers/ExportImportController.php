@@ -13,8 +13,9 @@ class ExportImportController extends Controller
         return Excel::download(new Products(), 'products.xlsx');
     }
 
-    public function import(Request $request)
+    public static function import(Request $request)
     {
+
         Excel::import(new \App\Imports\Products(), $request->file('import'));
 
         return redirect()->back()->with('success', 'Import Has Been updated successfully');
