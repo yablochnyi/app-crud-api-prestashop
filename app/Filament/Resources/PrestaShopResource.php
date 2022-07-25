@@ -16,13 +16,13 @@ class PrestaShopResource extends Resource
     {
         return [
             NavigationItem::make()
-                ->icon('heroicon-o-collection')
+                ->icon('heroicon-o-check')
                 ->label('Add all products')
                 ->group('PrestaShop')
                 ->isActiveWhen(fn (): bool => request()->routeIs('add.all.prestashop'))
                 ->url(route('add.all.prestashop')),
             NavigationItem::make()
-                ->icon('heroicon-o-collection')
+                ->icon('heroicon-o-currency-dollar')
                 ->label('Update all price')
                 ->group('PrestaShop')
                 ->isActiveWhen(fn (): bool => request()->routeIs('update.all.price.prestashop'))

@@ -5,13 +5,15 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Actions\BulkAction;
-use Illuminate\Database\Eloquent\Collection;
+use Filament\Tables\Actions\Action;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductResource extends Resource
 {
@@ -26,7 +28,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('item_code')->required()->rule('integer'),
-                Forms\Components\TextInput::make('product_number')->required()->rule('string')->unique(),
+                Forms\Components\TextInput::make('product_number')->required()->rule('string'),
                 Forms\Components\TextInput::make('product_name')->required()->rule('string'),
                 Forms\Components\BelongsToSelect::make('category_id')
                     ->relationship('category', 'title')->required(),
@@ -58,18 +60,33 @@ class ProductResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                Action::make('Import')
+                    ->action(function (array $data, Request $request) {
+//                        Excel::import(new \App\Imports\Products(), $data['attachment']);
+                        Excel::import(new \App\Imports\Products(), $request->file($data['attachment']));
+
+                        Filament::notify('success', 'Import Has Been updated successfully');
+                    })
+                    ->form([
+                        Forms\Components\FileUpload::make('attachment')
+                            ->required()
+                    ])
+            ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Action::make('Add to prestashop')
+                    ->url(fn (Product $record): string => route('add.prestashop', $record))
+                    ->icon('heroicon-o-check'),
+                Action::make('Update price')
+                    ->url(fn (Product $record): string => route('update.price.prestashop', $record))
+                    ->icon('heroicon-o-currency-dollar'),
+                Action::make('Update quantity')
+                    ->url(fn (Product $record): string => route('update.quantity.prestashop', $record))
+                    ->icon('heroicon-o-collection'),
 
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                BulkAction::make('Add to prestashop')
-                    ->action(fn (Product $record) => route('add.prestashop', ['product' => $record]))
-                    ->requiresConfirmation()
-                    ->color('success')
-                    ->icon('heroicon-o-check'),
             ]);
     }
 

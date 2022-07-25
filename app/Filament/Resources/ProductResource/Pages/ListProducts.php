@@ -30,50 +30,17 @@ class ListProducts extends ListRecords implements HasForms
         ];
     }
 
-    protected function getForms(): array
-    {
-        return array_merge(
-            parent::getForms(),
-            $this->getTableForms(),
-            [
-                //merge your own form with default ones
-                'customForm' => $this->makeForm()
-                    ->schema([
-                        FileUpload::make('attachment')
-                    ])
-                    ->model(ProductResource::class),
-            ]
-        );
-    }
-
     protected function getTableHeaderActions(): array
     {
         return array_merge(parent::getTableHeaderActions(), [
             ButtonAction::make('Export')->url(route('export'))->color('primary')->icon('heroicon-o-document-text'),
-            Action::make('Improt')
+            Action::make('updateAuthor')
                 ->action(function (Request $request) {
-                    $path = $request->file('import')->getRealPath();
-                    Excel::import(new Products(), $path);
                 })
                 ->form([
-                    Forms\Components\Select::make('Upload file')
-                        ->label('Upload File')
-                        ->required(),
-                ]),
-
-//            ButtonAction::make('Import')
-//                ->color('secondary')
-//                ->icon('heroicon-o-document-text')
-//                ->modalContent(view('admin.product.modal'))
-//                ->action(fn () => view('admin.product.modal')),
-//            Action::make('import')
-//                ->color('secondary')
-//                ->icon('heroicon-s-duplicate')
-//                ->modalContent(view('admin.product.modal'))
-//                ->action(function (Request $request) {
-//                    $path = $request->file('import')->getRealPath();
-//                    Excel::import(new Products(), $path);
-//                }),
+                    Forms\Components\FileUpload::make('attachment')
+                        ->required()
+                ])
     ]);
     }
 }
