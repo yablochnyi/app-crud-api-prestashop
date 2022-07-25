@@ -9,10 +9,11 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\BulkAction;
+use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\ButtonAction;
+use App\Models\User;
+use Filament\Forms;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -26,7 +27,6 @@ class ListProducts extends ListRecords implements HasForms
     {
         return [
             Actions\CreateAction::make(),
-            Action::make('settings')->color('secondary')
         ];
     }
 
@@ -39,30 +39,33 @@ class ListProducts extends ListRecords implements HasForms
                 //merge your own form with default ones
                 'customForm' => $this->makeForm()
                     ->schema([
-                        //your fields
+                        FileUpload::make('attachment')
                     ])
                     ->model(ProductResource::class),
             ]
         );
     }
 
-    protected function getTableBulkActions(): array
-    {
-        return [
-            BulkAction::make('dvdsvdf'),
-        ];
-    }
-
-
     protected function getTableHeaderActions(): array
     {
         return array_merge(parent::getTableHeaderActions(), [
             ButtonAction::make('Export')->url(route('export'))->color('primary')->icon('heroicon-o-document-text'),
-            ButtonAction::make('Import')
-                ->color('secondary')
-                ->icon('heroicon-o-document-text')
-                ->modalContent(view('admin.product.modal'))
-                ->action(fn () => view('admin.product.modal')),
+            Action::make('Improt')
+                ->action(function (Request $request) {
+                    $path = $request->file('import')->getRealPath();
+                    Excel::import(new Products(), $path);
+                })
+                ->form([
+                    Forms\Components\Select::make('Upload file')
+                        ->label('Upload File')
+                        ->required(),
+                ]),
+
+//            ButtonAction::make('Import')
+//                ->color('secondary')
+//                ->icon('heroicon-o-document-text')
+//                ->modalContent(view('admin.product.modal'))
+//                ->action(fn () => view('admin.product.modal')),
 //            Action::make('import')
 //                ->color('secondary')
 //                ->icon('heroicon-s-duplicate')

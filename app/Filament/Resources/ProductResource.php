@@ -10,15 +10,14 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ButtonAction;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use phpDocumentor\Reflection\Types\False_;
+use Filament\Tables\Actions\BulkAction;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
+
+    protected static ?string $navigationGroup = 'App - crud RME';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -48,8 +47,10 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('product_number')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('product_name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('category.title')->sortable()->searchable(),
-                Tables\Columns\BooleanColumn::make('description')->sortable(),
-                Tables\Columns\BooleanColumn::make('short_description')->sortable(),
+                Tables\Columns\BooleanColumn::make('description')->sortable()
+                    ->getStateUsing(fn ($record): bool => filled($record->description)),
+                Tables\Columns\BooleanColumn::make('short_description')->sortable()
+                    ->getStateUsing(fn ($record): bool => filled($record->short_description)),
                 Tables\Columns\TextColumn::make('unit')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('quantity')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('price_aed')->sortable()->searchable(),
@@ -64,10 +65,11 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-//                Tables\Actions\BulkAction::make('dvdsvdf')->route('export'),
-
-//                Tables\Actions\BulkAction::make('Export')->url(route('export'))->icon('heroicon-o-document-text')
-
+                BulkAction::make('Add to prestashop')
+                    ->action(fn (Product $record) => route('add.prestashop', ['product' => $record]))
+                    ->requiresConfirmation()
+                    ->color('success')
+                    ->icon('heroicon-o-check'),
             ]);
     }
 
