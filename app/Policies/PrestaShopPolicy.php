@@ -17,7 +17,7 @@ class PrestaShopPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_prestashop');
+        return $user->role == 1;
     }
 
     /**
@@ -28,7 +28,7 @@ class PrestaShopPolicy
      */
     public function view(User $user)
     {
-        return $user->can('view_prestashop');
+        return $user->role == 1;
     }
 
     /**
@@ -39,7 +39,7 @@ class PrestaShopPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_prestashop');
+        return $user->role == 1;
     }
 
     /**
@@ -50,7 +50,7 @@ class PrestaShopPolicy
      */
     public function update(User $user)
     {
-        return $user->can('update_prestashop');
+        return $user->role == 1;
     }
 
     /**
@@ -61,7 +61,7 @@ class PrestaShopPolicy
      */
     public function delete(User $user)
     {
-        return $user->can('delete_prestashop');
+        return $user->role == 1;
     }
 
     /**
@@ -72,7 +72,7 @@ class PrestaShopPolicy
      */
     public function deleteAny(User $user)
     {
-        return $user->can('delete_any_prestashop');
+        return $user->role == 1;
     }
 
 }

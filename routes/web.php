@@ -13,24 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//require __DIR__ . '/auth.php';
-//
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
-        return redirect()->route('filament.resources.products.index');
+        return redirect()->route('filament.resources.user-products.index');
     } else {
         return view('auth.login');
     }
 });
-//
-//Route::group(['middleware' => ['auth', 'verified']], function () {
-//    Route::get('/products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('user.products.index');
-//});
-//
-Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
-    // Filament dashboard
 
+//Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     // EXPORT/IMPORT
     Route::get('admin/products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
     Route::post('admin/products/import', [\App\Http\Controllers\ExportImportController::class, 'import'])->name('import');
@@ -44,7 +35,7 @@ Route::group(['middleware' => ['auth', 'admin', 'verified']], function () {
     // Cleat DB
 //    Route::get('cleat', [\App\Http\Controllers\Cleatdb\DescriptionController::class, 'getDescription'])->name('description.cleat');
 //    Route::get('update/description', [\App\Http\Controllers\Prestashop\UpdateDescriptionController::class, 'updateDescriptionOnPrestaShop'])->name('update.description');
-});
+//});
 
 
 

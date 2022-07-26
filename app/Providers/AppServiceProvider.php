@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
             Filament::registerNavigationGroups([
                 'App - crud RME',
                 'PrestaShop',
-                'User Products',
             ]);
         });
     }

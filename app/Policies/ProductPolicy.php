@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -17,18 +18,19 @@ class ProductPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view_any_product');
+        return $user->role == 1;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, Product $product)
     {
-        return $user->can('view_product');
+        return $user->role == 1;
     }
 
     /**
@@ -39,40 +41,54 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create_product');
+        return $user->role == 1;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Product $product)
     {
-        return $user->can('update_product');
+        return $user->role == 1;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Product $product)
     {
-        return $user->can('delete_product');
+        return $user->role == 1;
     }
 
     /**
-     * Determine whether the user can bulk delete.
+     * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function deleteAny(User $user)
+    public function restore(User $user, Product $product)
     {
-        return $user->can('delete_any_product');
+        return $user->role == 1;
     }
 
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Product $product)
+    {
+        return $user->role == 1;
+    }
 }
