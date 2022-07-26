@@ -28,6 +28,8 @@ class Products implements ToCollection, WithHeadingRow
             '*.quantity' => 'required|integer',
             '*.price_aed' => 'required',
             '*.category' => 'required',
+            '*.description' => 'nullable',
+            '*.short_description' => 'nullable',
         ])->validate();
 
         foreach ($rows as $row) {
@@ -43,6 +45,8 @@ class Products implements ToCollection, WithHeadingRow
                 'unit' => $row['unit'],
                 'quantity' => $row['quantity'],
                 'price_aed' => $row['price_aed'],
+                'description' => $row['description'],
+                'short_description' => $row['short_description'],
             ]);
         }
     }

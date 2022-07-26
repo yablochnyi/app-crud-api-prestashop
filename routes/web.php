@@ -17,7 +17,7 @@ Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect()->route('filament.resources.user-products.index');
     } else {
-        return view('auth.login');
+        return redirect()->route('filament.auth.login');
     }
 });
 
