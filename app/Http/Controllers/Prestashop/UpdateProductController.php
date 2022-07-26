@@ -50,7 +50,7 @@ class UpdateProductController extends Controller
                 'id' => (int)$productFields->id,
                 'putXml' => $xml->asXML(),
             ]);
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Price Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
 
@@ -101,7 +101,7 @@ class UpdateProductController extends Controller
                     'putXml' => $xml->asXML(),
                 ]);
             }
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Prices Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
 
@@ -144,7 +144,7 @@ class UpdateProductController extends Controller
             $opt['putXml'] = $xml->asXML();
             $opt['id'] = $item->id;
             $xml = $webService->edit($opt);
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Quantity Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();
@@ -188,7 +188,7 @@ class UpdateProductController extends Controller
                 $opt['id'] = $item->id;
                 $webService->edit($opt);
             }
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Quantity Has Been updated successfully');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Error: <br />' . $ex->getMessage();

@@ -24,11 +24,14 @@
 
 ## Instalation 
 
-1. Clone repo.
-2. Handle .ENV file
-3. Generate key: php artisan key:generate
-4. composer install
-5. Add key to env PS_WS_AUTH_KEY
+- Clone repo.
+- Handle .ENV file
+- Generate key: php artisan key:generate
+- composer install
+- Add key to env PS_WS_AUTH_KEY
+- php artisan db:seed
+   
+    
 
 For dev purpose: php artisan serve.
 

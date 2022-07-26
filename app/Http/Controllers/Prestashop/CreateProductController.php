@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Prestashop;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 use PrestaShopWebservice;
 use PrestaShopWebserviceException;
 
@@ -28,10 +29,10 @@ class CreateProductController extends Controller
         if ($flag !== true) {
             $this->addProductOnPrestaShop($product);
         } else {
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Product already exists');
         }
-        return redirect()->route('products.index')
+        return redirect()->route('filament.resources.products.index')
             ->with('success', 'Product Has Been created successfully');
     }
 
@@ -60,7 +61,7 @@ class CreateProductController extends Controller
             $ProductId = $xml->product->id;
 
             $this->getIdStockAvailableAndSet($ProductId, $product);
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Product Has Been created successfully');
 
         } catch (PrestaShopWebserviceException $ex) {

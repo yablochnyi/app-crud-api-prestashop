@@ -31,6 +31,8 @@ class Products implements FromCollection, WithHeadings, WithMapping, WithEvents,
             'Unit',
             'Quantity',
             'Price AED',
+            'Description',
+            'Short Description',
         ];
     }
 
@@ -43,6 +45,8 @@ class Products implements FromCollection, WithHeadings, WithMapping, WithEvents,
             $signup->unit,
             $signup->quantity,
             $signup->price_aed,
+            $signup->description,
+            $signup->short_description,
         ];
     }
 

@@ -31,7 +31,7 @@ class CreateAllProductController extends Controller
                     $this->addProductOnPrestaShop($product);
                 }
             }
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Products Has Been created successfully');
         } catch (PrestaShopWebserviceException $ex) {
             echo 'Other error: <br />' . $ex->getMessage();
@@ -63,7 +63,7 @@ class CreateAllProductController extends Controller
             $ProductId = $xml->product->id;
 
             $this->getIdStockAvailableAndSet($ProductId, $product);
-            return redirect()->route('products.index')
+            return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Product Has Been created successfully');
 
         } catch (PrestaShopWebserviceException $ex) {

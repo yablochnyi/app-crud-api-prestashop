@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,9 +13,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+
     const ROLE_ADMIN = 1;
     const ROLE_USER = 0;
-
+//
     public static function getRoles()
     {
         return [
@@ -22,6 +25,11 @@ class User extends Authenticatable
             self::ROLE_USER => 'Users',
         ];
     }
+
+//    public function canAccessFilament(): bool
+//    {
+//        return str_ends_with($this->email, '@admin.com');
+//    }
     /**
      * The attributes that are mass assignable.
      *

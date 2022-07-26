@@ -17,10 +17,6 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-//        if (auth()->user()->role !== User::ROLE_ADMIN)
-//        {
-//            return redirect('/products');
-//        }
         return $next($request);
     }
 }
