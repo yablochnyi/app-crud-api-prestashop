@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ButtonAction;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -61,15 +62,18 @@ class ProductResource extends Resource
                 //
             ])
             ->headerActions([
-                Action::make('Import')
-                    ->action(function (array $data, Request $request) {
-//                        Excel::import(new \App\Imports\Products(), $data['attachment']);
-                        Excel::import(new \App\Imports\Products(), $request->file($data['attachment']));
+                ButtonAction::make('Export')->url(route('export'))->color('primary')->icon('heroicon-o-document-text'),
+                ButtonAction::make('Import')->color('primary')->icon('heroicon-o-document-text')
+                    ->action(function ($data, Request $request) {
+//                        $path = 'app/public/' . $data['attachment'];
+                        $test = $request->file('app/public/' . $data['import']);
+                        dd($test);
+                        Excel::import(new \App\Imports\Products(), $path);
 
                         Filament::notify('success', 'Import Has Been updated successfully');
                     })
                     ->form([
-                        Forms\Components\FileUpload::make('attachment')
+                        Forms\Components\FileUpload::make('import')
                             ->required()
                     ])
             ])

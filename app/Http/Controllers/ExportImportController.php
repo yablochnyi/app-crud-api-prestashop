@@ -13,11 +13,11 @@ class ExportImportController extends Controller
         return Excel::download(new Products(), 'products.xlsx');
     }
 
-    public static function import(Request $request)
-    {
-
-        Excel::import(new \App\Imports\Products(), $request->file('import'));
-
-        return redirect()->back()->with('success', 'Import Has Been updated successfully');
-    }
+//    public static function import(Request $request)
+//    {
+//
+//        Excel::import(new \App\Imports\Products(), $request->file('import'));
+//
+//        return redirect()->back()->with('success', 'Import Has Been updated successfully');
+//    }
 }
