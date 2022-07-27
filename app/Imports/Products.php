@@ -25,7 +25,7 @@ class Products implements ToCollection, WithHeadingRow
 //            '*.product_number' => 'required|nullable',
             '*.product_name' => 'required|string',
             '*.unit' => 'required',
-            '*.quantity' => 'required|integer',
+            '*.quantity' => 'nullable',
             '*.price_aed' => 'required',
             '*.category' => 'required',
             '*.description' => 'nullable',
@@ -36,7 +36,7 @@ class Products implements ToCollection, WithHeadingRow
             $category = $this->categories->where('title', $row['category'])->first();
 
             Product::updateOrCreate([
-                'product_number' => $row['product_number']
+                'product_name' => $row['product_name']
             ], [
                 'item_code' => $row['item_code'],
                 'product_number' => $row['product_number'],

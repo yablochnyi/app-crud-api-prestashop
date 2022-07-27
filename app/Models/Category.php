@@ -12,6 +12,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(UserProduct::class, 'category_id', 'id');
+        return $this->hasMany(UserProduct::class, 'category_id', 'prestashop_id');
     }
 }

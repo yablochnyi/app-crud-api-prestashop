@@ -14,6 +14,7 @@ class PrestaShopResource extends Resource
 
     public static function getNavigationItems(): array
     {
+
         return [
             NavigationItem::make()
                 ->icon('heroicon-o-check')
@@ -31,8 +32,22 @@ class PrestaShopResource extends Resource
                 ->icon('heroicon-o-collection')
                 ->label('Update all quantity')
                 ->group('PrestaShop')
-                ->isActiveWhen(fn (): bool => request()->routeIs('update.all.price.prestashop'))
+                ->isActiveWhen(fn (): bool => request()->routeIs('update.all.quantity.prestashop'))
                 ->url(route('update.all.quantity.prestashop')),
+            NavigationItem::make()
+                ->icon('heroicon-o-collection')
+                ->label('Get categories from PrestaShop')
+                ->group('App - crud RME')
+                ->isActiveWhen(fn (): bool => request()->routeIs('get.category'))
+                ->url(route('get.category'))
+                ->sort(2),
+            NavigationItem::make()
+                ->icon('heroicon-o-collection')
+                ->label('Get products from PrestaShop')
+                ->group('App - crud RME')
+                ->isActiveWhen(fn (): bool => request()->routeIs('get.product'))
+                ->url(route('get.product'))
+                ->sort(3),
         ];
     }
 
