@@ -19,12 +19,12 @@ class CreateAllProductController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
                 $resource = $xml->children()->children();
                 $flag = false;
 
-                if ($resource->product->reference == $product->product_number) {
+                if ($resource->product->id_manufacturer == $product->item_code) {
                     $flag = true;
                 }
                 if ($flag !== true) {

@@ -19,7 +19,7 @@ class UpdateProductController extends Controller
             $xml = $webService->get([
                 'resource' => 'products',
                 'display' => 'full',
-                'filter[reference]' => $product->product_number
+                'filter[id_manufacturer]' => $product->item_code
             ]);
 
             $resource = $xml->products->children()->children();
@@ -60,7 +60,6 @@ class UpdateProductController extends Controller
 
     public static function updateAllProductPriceOnPrestaShop()
     {
-        dd(1111111);
         $products = Product::all();
         $value = config('prestashop');
 
@@ -70,12 +69,10 @@ class UpdateProductController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
-//                    'filter[name]' => $product->product_name
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
 
                 $resource = $xml->products->children()->children();
-
                 $xml = $webService->get([
                     'resource' => 'products',
                     'id' => $resource->id,
@@ -95,9 +92,7 @@ class UpdateProductController extends Controller
                 unset($productFields->date_add);
                 unset($productFields->date_upd);
 
-//                $productFields->price = $product->price_aed;
-                $productFields->id_manufacturer = $product->item_code;
-                $productFields->unity = $product->unit;
+                $productFields->price = $product->price_aed;
 
                 $webService->edit([
                     'resource' => 'products',
@@ -122,7 +117,7 @@ class UpdateProductController extends Controller
             $xml = $webService->get([
                 'resource' => 'products',
                 'display' => 'full',
-                'filter[reference]' => $product->product_number
+                'filter[id_manufacturer]' => $product->item_code
             ]);
 
             $resource = $xml->products->children()->children();
@@ -166,7 +161,7 @@ class UpdateProductController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
 
                 $resource = $xml->products->children()->children();

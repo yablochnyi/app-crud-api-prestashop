@@ -14,7 +14,6 @@ class PrestaShopResource extends Resource
 
     public static function getNavigationItems(): array
     {
-
         return [
             NavigationItem::make()
                 ->icon('heroicon-o-check')

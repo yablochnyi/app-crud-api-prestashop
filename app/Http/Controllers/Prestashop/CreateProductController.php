@@ -14,16 +14,16 @@ class CreateProductController extends Controller
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-        $newProductId = $product->product_number;
+        $newProductId = $product->item_code;
 
         $xml = $webService->get([
             'resource' => 'products',
             'display' => 'full',
-            'filter[reference]' => $newProductId
+            'filter[id_manufacturer]' => $newProductId
         ]);
         $resource = $xml->children()->children();
         $flag = false;
-        if ($resource->product->reference == $newProductId) {
+        if ($resource->product->id_manufacturer == $newProductId) {
             $flag = true;
         }
         if ($flag !== true) {

@@ -24,6 +24,7 @@ class GetAllProductController extends Controller
                     'resource' => 'products',
                     'id' => $product->attributes()['id'],
                 ]);
+                $category = Category::where('prestashop_id', $xml->product->id_category_default)->get();
                 Product::firstOrCreate([
                     'product_name' => $xml->product->name->language[0]
                 ], [
@@ -31,7 +32,7 @@ class GetAllProductController extends Controller
                     'product_number' => $xml->product->reference,
                     'unit' => $xml->product->unity,
                     'item_code' => $xml->product->id_manufacturer,
-                    'category_id' => $xml->product->id_category_default,
+                    'category_id' => $category[0]->id,
                     'quantity' => $xml->product->quantity,
                     'price_aed' => $xml->product->price,
                     'description' => $xml->product->description->language[1],
