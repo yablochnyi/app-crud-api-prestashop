@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class DescriptionController extends Controller
 {
+    // Get description and short description from Cleat to db RME panel and PrestaShop
     public function getDescription()
     {
         $productsGetDesc = DB::connection('cleat_db')

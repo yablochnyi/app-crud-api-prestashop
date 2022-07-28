@@ -19,7 +19,7 @@ class UpdateProductController extends Controller
             $xml = $webService->get([
                 'resource' => 'products',
                 'display' => 'full',
-                'filter[reference]' => $product->product_number
+                'filter[id_manufacturer]' => $product->item_code
             ]);
 
             $resource = $xml->products->children()->children();
@@ -69,11 +69,10 @@ class UpdateProductController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
 
                 $resource = $xml->products->children()->children();
-
                 $xml = $webService->get([
                     'resource' => 'products',
                     'id' => $resource->id,
@@ -118,7 +117,7 @@ class UpdateProductController extends Controller
             $xml = $webService->get([
                 'resource' => 'products',
                 'display' => 'full',
-                'filter[reference]' => $product->product_number
+                'filter[id_manufacturer]' => $product->item_code
             ]);
 
             $resource = $xml->products->children()->children();
@@ -162,7 +161,7 @@ class UpdateProductController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
 
                 $resource = $xml->products->children()->children();

@@ -14,16 +14,16 @@ class CreateProductController extends Controller
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-        $newProductId = $product->product_number;
+        $newProductId = $product->item_code;
 
         $xml = $webService->get([
             'resource' => 'products',
             'display' => 'full',
-            'filter[reference]' => $newProductId
+            'filter[id_manufacturer]' => $newProductId
         ]);
         $resource = $xml->children()->children();
         $flag = false;
-        if ($resource->product->reference == $newProductId) {
+        if ($resource->product->id_manufacturer == $newProductId) {
             $flag = true;
         }
         if ($flag !== true) {
@@ -49,6 +49,10 @@ class CreateProductController extends Controller
             unset($resource_product->position_in_category);
 
             $resource_product->id_category_default = $product->category->prestashop_id;
+            $resource_product->id_manufacturer = $product->item_code;
+            $resource_product->unity = $product->unit;
+            $resource_product->description->language[0] = $product->description;
+            $resource_product->description_short->language[0] = $product->short_description;
             $resource_product->price = $product->price_aed;
             $resource_product->reference = $product->product_number;
             $resource_product->active = 1;

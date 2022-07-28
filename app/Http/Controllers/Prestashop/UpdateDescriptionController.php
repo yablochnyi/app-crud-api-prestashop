@@ -19,7 +19,7 @@ class UpdateDescriptionController extends Controller
                 $xml = $webService->get([
                     'resource' => 'products',
                     'display' => 'full',
-                    'filter[reference]' => $product->product_number
+                    'filter[id_manufacturer]' => $product->item_code
                 ]);
 
                 $resource = $xml->products->children()->children();
