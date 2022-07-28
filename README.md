@@ -18,9 +18,9 @@
 ## Technological stack
 
 - Laravel 9
-- Yajra DataTables
 - MySQL database
 - API PrestaShop (WebService)
+- Admin Panel (Filanent)
 
 ## Instalation 
 
