@@ -13,6 +13,8 @@
     - Update all prices products to prestashop
     - Update quantity one product to prestashop
     - Update quantity all products to prestashop
+    - Get products from prestashop
+    - Get category from prestashop
 
 
 ## Technological stack
