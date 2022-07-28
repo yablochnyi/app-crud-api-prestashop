@@ -60,6 +60,7 @@ class UpdateProductController extends Controller
 
     public static function updateAllProductPriceOnPrestaShop()
     {
+        dd(1111111);
         $products = Product::all();
         $value = config('prestashop');
 
@@ -70,6 +71,7 @@ class UpdateProductController extends Controller
                     'resource' => 'products',
                     'display' => 'full',
                     'filter[reference]' => $product->product_number
+//                    'filter[name]' => $product->product_name
                 ]);
 
                 $resource = $xml->products->children()->children();
@@ -93,7 +95,9 @@ class UpdateProductController extends Controller
                 unset($productFields->date_add);
                 unset($productFields->date_upd);
 
-                $productFields->price = $product->price_aed;
+//                $productFields->price = $product->price_aed;
+                $productFields->id_manufacturer = $product->item_code;
+                $productFields->unity = $product->unit;
 
                 $webService->edit([
                     'resource' => 'products',

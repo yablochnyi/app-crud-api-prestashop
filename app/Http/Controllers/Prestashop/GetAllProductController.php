@@ -24,13 +24,13 @@ class GetAllProductController extends Controller
                     'resource' => 'products',
                     'id' => $product->attributes()['id'],
                 ]);
-                print_r($xml->unity);
-                dd($xml);
                 Product::firstOrCreate([
                     'product_name' => $xml->product->name->language[0]
                 ], [
                     'product_name' => $xml->product->name->language[0],
                     'product_number' => $xml->product->reference,
+                    'unit' => $xml->product->unity,
+                    'item_code' => $xml->product->id_manufacturer,
                     'category_id' => $xml->product->id_category_default,
                     'quantity' => $xml->product->quantity,
                     'price_aed' => $xml->product->price,

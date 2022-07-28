@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (\Illuminate\Support\Facades\Auth::check()) {
+    if (\Illuminate\Support\Facades\Auth::check() && auth()->user()->role == 1 ) {
+        return redirect()->route('filament.resources.products.index');
+    } elseif (\Illuminate\Support\Facades\Auth::check() && auth()->user()->role == 0) {
         return redirect()->route('filament.resources.user-products.index');
     } else {
         return redirect()->route('filament.auth.login');
@@ -34,7 +36,7 @@ Route::get('/', function () {
     Route::get('get/category', [\App\Http\Controllers\Prestashop\GetAllCategoryController::class, 'getCategory'])->name('get.category');
     Route::get('get/product', [\App\Http\Controllers\Prestashop\GetAllProductController::class, 'getProduct'])->name('get.product');
     // Cleat DB
-//    Route::get('cleat', [\App\Http\Controllers\Cleatdb\DescriptionController::class, 'getDescription'])->name('description.cleat');
+    Route::get('cleat', [\App\Http\Controllers\Cleatdb\DescriptionController::class, 'getDescription'])->name('description.cleat');
 //    Route::get('update/description', [\App\Http\Controllers\Prestashop\UpdateDescriptionController::class, 'updateDescriptionOnPrestaShop'])->name('update.description');
 //});
 

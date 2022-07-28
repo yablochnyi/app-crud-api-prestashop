@@ -49,6 +49,10 @@ class CreateProductController extends Controller
             unset($resource_product->position_in_category);
 
             $resource_product->id_category_default = $product->category->prestashop_id;
+            $resource_product->id_manufacturer = $product->item_code;
+            $resource_product->unity = $product->unit;
+            $resource_product->description->language[0] = $product->description;
+            $resource_product->description_short->language[0] = $product->short_description;
             $resource_product->price = $product->price_aed;
             $resource_product->reference = $product->product_number;
             $resource_product->active = 1;
