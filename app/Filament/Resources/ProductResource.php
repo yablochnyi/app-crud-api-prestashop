@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Http\Controllers\Prestashop\CreateProductController;
 use App\Http\Controllers\Prestashop\DeleteController;
+use App\Http\Controllers\Prestashop\UpdateProductController;
 use App\Models\Product;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -75,18 +77,30 @@ class ProductResource extends Resource
                     ])
             ])
             ->actions([
-                Action::make('Add to prestashop')
-                    ->url(fn (Product $record): string => route('add.prestashop', $record))
-                    ->icon('heroicon-o-check'),
-                Action::make('Update price')
-                    ->url(fn (Product $record): string => route('update.price.prestashop', $record))
-                    ->icon('heroicon-o-currency-dollar'),
-                Action::make('Update quantity')
-                    ->url(fn (Product $record): string => route('update.quantity.prestashop', $record))
-                    ->icon('heroicon-o-collection'),
 
             ])
             ->bulkActions([
+                Tables\Actions\BulkAction::make('Add to prestashop')
+                    ->action(fn (Collection $records) => CreateProductController::searchProduct($records))
+                    ->requiresConfirmation()
+                    ->label('Add to PrestaShop')
+                    ->color('success')
+                    ->icon('heroicon-o-check')
+                    ->successNotificationMessage('Products Has Been created successfully'),
+                Tables\Actions\BulkAction::make('Update price')
+                    ->action(fn (Collection $records) => UpdateProductController::updateProductPriceOnPrestaShop($records))
+                    ->requiresConfirmation()
+                    ->label('Update price to PShop')
+                    ->color('success')
+                    ->icon('heroicon-o-currency-dollar')
+                    ->successNotificationMessage('Products Has Been updated successfully'),
+                Tables\Actions\BulkAction::make('Update quantity')
+                    ->action(fn (Collection $records) => UpdateProductController::updateProductQuantityOnPrestaShop($records))
+                    ->requiresConfirmation()
+                    ->label('Update quantity to PShop')
+                    ->color('success')
+                    ->icon('heroicon-o-collection')
+                    ->successNotificationMessage('Products Has Been updated successfully'),
                 Tables\Actions\BulkAction::make('Delete selected')
                     ->action(fn (Collection $records) => DeleteController::deleteToPrestashopAndDatabase($records))
                     ->requiresConfirmation()

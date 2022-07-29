@@ -10,33 +10,28 @@ use PrestaShopWebserviceException;
 
 class CreateProductController extends Controller
 {
-    public function searchProduct(Product $product)
+    public static function searchProduct(Collection $collection)
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
-        $newProductId = $product->item_code;
-
-        $xml = $webService->get([
-            'resource' => 'products',
-            'display' => 'full',
-            'filter[id_manufacturer]' => $newProductId
-        ]);
-        $resource = $xml->children()->children();
-        $flag = false;
-        if ($resource->product->id_manufacturer == $newProductId) {
-            $flag = true;
+        foreach ($collection as $product) {
+            $xml = $webService->get([
+                'resource' => 'products',
+                'display' => 'full',
+                'filter[id_manufacturer]' => $product->item_code
+            ]);
+            $resource = $xml->children()->children();
+            $flag = false;
+            if ($resource->product->id_manufacturer == $product->item_code) {
+                $flag = true;
+            }
+            if ($flag !== true) {
+                self::addProductOnPrestaShop($product);
+            }
         }
-        if ($flag !== true) {
-            $this->addProductOnPrestaShop($product);
-        } else {
-            return redirect()->route('filament.resources.products.index')
-                ->with('success', 'Product already exists');
-        }
-        return redirect()->route('filament.resources.products.index')
-            ->with('success', 'Product Has Been created successfully');
     }
 
-    public function addProductOnPrestaShop($product)
+    public static function addProductOnPrestaShop($product)
     {
         $value = config('prestashop');
 
@@ -64,7 +59,7 @@ class CreateProductController extends Controller
             $xml = $webService->add($products);
             $ProductId = $xml->product->id;
 
-            $this->getIdStockAvailableAndSet($ProductId, $product);
+            self::getIdStockAvailableAndSet($ProductId, $product);
             return redirect()->route('filament.resources.products.index')
                 ->with('success', 'Product Has Been created successfully');
 
@@ -73,7 +68,7 @@ class CreateProductController extends Controller
         }
     }
 
-    public function getIdStockAvailableAndSet($ProductId, $product)
+    public static function getIdStockAvailableAndSet($ProductId, $product)
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
@@ -84,10 +79,10 @@ class CreateProductController extends Controller
         $xml = $webService->get($opt);
         $item = $xml->product->associations->stock_availables->stock_available;
 
-        $this->set_product_quantity($ProductId, $item->id, $item->id_product_attribute, $product);
+        self::set_product_quantity($ProductId, $item->id, $item->id_product_attribute, $product);
     }
 
-    public function set_product_quantity($ProductId, $StokId, $AttributeId, $product)
+    public static function set_product_quantity($ProductId, $StokId, $AttributeId, $product)
     {
         $value = config('prestashop');
         $webService = new PrestaShopWebservice($value['path'], $value['key'], $value['debug']);
