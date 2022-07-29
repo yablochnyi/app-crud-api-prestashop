@@ -28,10 +28,7 @@ Route::get('/', function () {
     Route::get('admin/products/export/', [\App\Http\Controllers\ExportImportController::class, 'export'])->name('export');
     // PRESTASHOP
     Route::get('add/all/prestashop', [\App\Http\Controllers\Prestashop\CreateAllProductController::class, 'searchProduct'])->name('add.all.prestashop');
-    Route::get('add/{product}/prestashop', [\App\Http\Controllers\Prestashop\CreateProductController::class, 'searchProduct'])->name('add.prestashop');
-    Route::get('update/price/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductPriceOnPrestaShop'])->name('update.price.prestashop');
     Route::get('update/priceall/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateAllProductPriceOnPrestaShop'])->name('update.all.price.prestashop');
-    Route::get('update/quantity/{product}/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateProductQuantityOnPrestaShop'])->name('update.quantity.prestashop');
     Route::get('update/quantityall/prestashop', [\App\Http\Controllers\Prestashop\UpdateProductController::class, 'updateAllProductQuantityOnPrestaShop'])->name('update.all.quantity.prestashop');
     Route::get('get/category', [\App\Http\Controllers\Prestashop\GetAllCategoryController::class, 'getCategory'])->name('get.category');
     Route::get('get/product', [\App\Http\Controllers\Prestashop\GetAllProductController::class, 'getProduct'])->name('get.product');
