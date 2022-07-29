@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Http\Controllers\Prestashop\DeleteController;
 use App\Models\Product;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -13,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ButtonAction;
+use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductResource extends Resource
@@ -85,7 +87,12 @@ class ProductResource extends Resource
 
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkAction::make('Delete selected')
+                    ->action(fn (Collection $records) => DeleteController::deleteToPrestashopAndDatabase($records))
+                    ->requiresConfirmation()
+                    ->color('danger')
+                    ->icon('heroicon-s-trash')
+                    ->successNotificationMessage('Products deleted'),
             ]);
     }
 
